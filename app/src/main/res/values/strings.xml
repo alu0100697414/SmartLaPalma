@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">SmartLaPalma</string>
+
+    <!--Activity names-->
+    <string name="main_activity_name">Inicio</string>
+
+    <!--Material Drawer-->
+    <string name="resident">Residente</string>
+    <string name="tourist">Turista</string>
+
+    <string name="init">INICIO</string>
+    <string name="news">NOTICIAS</string>
+    <string name="meteorology">METEOROLOGÍA</string>
+    <string name="transport">TRANSPORTE PÚBLICO</string>
+    <string name="interest_places">LUGARES DE INTERÉS</string>
+    <string name="contact">CONTACTO</string>
+    <string name="about">ACERCA DE</string>
+    <string name="exit">SALIR</string>
+
+</resources>

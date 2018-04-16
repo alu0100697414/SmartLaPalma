@@ -1,0 +1,12 @@
+package com.example.jose.smartlapalma.Models;
+
+/**
+ * Created by Jose on 16/04/2018.
+ */
+
+public class SharedPreferencesKeys {
+
+    public static final String SHARED_PREFERENCES_NAME = "app_preferences";
+
+    public static final String USER_TYPE = "user_type";
+}

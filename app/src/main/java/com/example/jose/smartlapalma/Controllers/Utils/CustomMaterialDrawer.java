@@ -11,12 +11,13 @@ import android.view.View;
 import com.example.jose.smartlapalma.Models.SharedPreferencesKeys;
 import com.example.jose.smartlapalma.Models.User;
 import com.example.jose.smartlapalma.R;
+import com.example.jose.smartlapalma.Views.Activities.AboutActivity;
+import com.example.jose.smartlapalma.Views.Activities.ContactActivity;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
@@ -86,14 +87,14 @@ public class CustomMaterialDrawer {
                 }).build();
 
         // Drawer list items
-        PrimaryDrawerItem initItem = new PrimaryDrawerItem().withIdentifier(1).withName(mActivity.getString(R.string.init));
-        SecondaryDrawerItem newsItem = new SecondaryDrawerItem().withIdentifier(2).withName(mActivity.getString(R.string.news));
-        SecondaryDrawerItem meteorologyItem = new SecondaryDrawerItem().withIdentifier(3).withName(mActivity.getString(R.string.meteorology));
-        SecondaryDrawerItem transportItem = new SecondaryDrawerItem().withIdentifier(4).withName(mActivity.getString(R.string.transport));
-        SecondaryDrawerItem interest_placesItem = new SecondaryDrawerItem().withIdentifier(5).withName(mActivity.getString(R.string.interest_places));
-        SecondaryDrawerItem contactItem = new SecondaryDrawerItem().withIdentifier(6).withName(mActivity.getString(R.string.contact));
-        SecondaryDrawerItem aboutItem = new SecondaryDrawerItem().withIdentifier(7).withName(mActivity.getString(R.string.about));
-        SecondaryDrawerItem exitItem = new SecondaryDrawerItem().withIdentifier(8).withName(mActivity.getString(R.string.exit));
+        SecondaryDrawerItem initItem = new SecondaryDrawerItem().withIdentifier(1).withName(mActivity.getString(R.string.init)).withSelectable(false);
+        SecondaryDrawerItem newsItem = new SecondaryDrawerItem().withIdentifier(2).withName(mActivity.getString(R.string.news)).withSelectable(false);
+        SecondaryDrawerItem meteorologyItem = new SecondaryDrawerItem().withIdentifier(3).withName(mActivity.getString(R.string.meteorology)).withSelectable(false);
+        SecondaryDrawerItem transportItem = new SecondaryDrawerItem().withIdentifier(4).withName(mActivity.getString(R.string.transport)).withSelectable(false);
+        SecondaryDrawerItem interest_placesItem = new SecondaryDrawerItem().withIdentifier(5).withName(mActivity.getString(R.string.interest_places)).withSelectable(false);
+        SecondaryDrawerItem contactItem = new SecondaryDrawerItem().withIdentifier(6).withName(mActivity.getString(R.string.contact)).withSelectable(false);
+        SecondaryDrawerItem aboutItem = new SecondaryDrawerItem().withIdentifier(7).withName(mActivity.getString(R.string.about)).withSelectable(false);
+        SecondaryDrawerItem exitItem = new SecondaryDrawerItem().withIdentifier(8).withName(mActivity.getString(R.string.exit)).withSelectable(false);
 
 
         // Create the drawer with the items and the previous header
@@ -116,19 +117,35 @@ public class CustomMaterialDrawer {
                         new DividerDrawerItem(),
                         exitItem
                 )
+                .withSelectedItem(-1)
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
 
+                        // Current screen in menu is updated
+                        mEditor = mPrefs.edit();
+                        mEditor.putInt(SharedPreferencesKeys.CURRENT_SCREEN_ID,
+                                (int) drawerItem.getIdentifier());
+                        mEditor.commit();
+
                         // Menu actions
                         switch ((int) drawerItem.getIdentifier()){
+
+                            case 6: // Open contact activity
+                                openContactActivity();
+                                break;
+
+                            case 7: // Open about activity
+                                openAboutActivity();
+                                break;
 
                             case 8: // Closes application
                                 closeApplication();
                                 break;
                         }
 
-                        return true;
+                        return false;
                     }
                 }).build();
     }
@@ -174,14 +191,14 @@ public class CustomMaterialDrawer {
                 }).build();
 
         // Drawer list items
-        PrimaryDrawerItem initItem = new PrimaryDrawerItem().withIdentifier(1).withName(mActivity.getString(R.string.init));
-        SecondaryDrawerItem newsItem = new SecondaryDrawerItem().withIdentifier(2).withName(mActivity.getString(R.string.news));
-        SecondaryDrawerItem meteorologyItem = new SecondaryDrawerItem().withIdentifier(3).withName(mActivity.getString(R.string.meteorology));
-        SecondaryDrawerItem transportItem = new SecondaryDrawerItem().withIdentifier(4).withName(mActivity.getString(R.string.transport));
-        SecondaryDrawerItem interest_placesItem = new SecondaryDrawerItem().withIdentifier(5).withName(mActivity.getString(R.string.interest_places));
-        SecondaryDrawerItem contactItem = new SecondaryDrawerItem().withIdentifier(6).withName(mActivity.getString(R.string.contact));
-        SecondaryDrawerItem aboutItem = new SecondaryDrawerItem().withIdentifier(7).withName(mActivity.getString(R.string.about));
-        SecondaryDrawerItem exitItem = new SecondaryDrawerItem().withIdentifier(8).withName(mActivity.getString(R.string.exit));
+        SecondaryDrawerItem initItem = new SecondaryDrawerItem().withIdentifier(1).withName(mActivity.getString(R.string.init)).withSelectable(false);
+        SecondaryDrawerItem newsItem = new SecondaryDrawerItem().withIdentifier(2).withName(mActivity.getString(R.string.news)).withSelectable(false);
+        SecondaryDrawerItem meteorologyItem = new SecondaryDrawerItem().withIdentifier(3).withName(mActivity.getString(R.string.meteorology)).withSelectable(false);
+        SecondaryDrawerItem transportItem = new SecondaryDrawerItem().withIdentifier(4).withName(mActivity.getString(R.string.transport)).withSelectable(false);
+        SecondaryDrawerItem interest_placesItem = new SecondaryDrawerItem().withIdentifier(5).withName(mActivity.getString(R.string.interest_places)).withSelectable(false);
+        SecondaryDrawerItem contactItem = new SecondaryDrawerItem().withIdentifier(6).withName(mActivity.getString(R.string.contact)).withSelectable(false);
+        SecondaryDrawerItem aboutItem = new SecondaryDrawerItem().withIdentifier(7).withName(mActivity.getString(R.string.about)).withSelectable(false);
+        SecondaryDrawerItem exitItem = new SecondaryDrawerItem().withIdentifier(8).withName(mActivity.getString(R.string.exit)).withSelectable(false);
 
 
         // Create the drawer with the items and the previous header
@@ -204,21 +221,48 @@ public class CustomMaterialDrawer {
                         new DividerDrawerItem(),
                         exitItem
                 )
+                .withSelectedItem(-1)
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
 
+                        // Current screen in menu is updated
+                        mEditor = mPrefs.edit();
+                        mEditor.putInt(SharedPreferencesKeys.CURRENT_SCREEN_ID,
+                                (int) drawerItem.getIdentifier());
+                        mEditor.commit();
+
                         // Menu actions
                         switch ((int) drawerItem.getIdentifier()){
+
+                            case 6: // Open contact activity
+                                openContactActivity();
+                                break;
+
+                            case 7: // Open about activity
+                                openAboutActivity();
+                                break;
 
                             case 8: // Closes application
                                 closeApplication();
                                 break;
                         }
 
-                        return true;
+                        return false;
                     }
                 }).build();
+    }
+
+    // This function open the contact screen
+    private void openContactActivity(){
+        Intent intent = new Intent(mActivity, ContactActivity.class);
+        mActivity.startActivity(intent);
+    }
+
+    // This function open the about screen
+    private void openAboutActivity(){
+        Intent intent = new Intent(mActivity, AboutActivity.class);
+        mActivity.startActivity(intent);
     }
 
     // This function restarts the activity

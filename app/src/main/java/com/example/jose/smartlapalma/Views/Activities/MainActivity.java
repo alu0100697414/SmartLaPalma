@@ -13,7 +13,9 @@ import com.example.jose.smartlapalma.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private SharedPreferences prefs;
+    private SharedPreferences mPrefs;
+
+    private int typeUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +27,14 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // Shared preferences
-        prefs = getSharedPreferences(
+        mPrefs = getSharedPreferences(
                 SharedPreferencesKeys.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
 
-        int typeUser = prefs.getInt(SharedPreferencesKeys.USER_TYPE, User.RESIDENT_USER);
+        typeUser = mPrefs.getInt(SharedPreferencesKeys.USER_TYPE, User.RESIDENT_USER);
 
         // Init and configure Material Drawer
         CustomMaterialDrawer customMaterialDrawer = new CustomMaterialDrawer(this);
+
         if(typeUser == User.RESIDENT_USER){
             customMaterialDrawer.setResidentMode();
         } else {

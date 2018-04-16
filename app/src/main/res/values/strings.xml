@@ -1,8 +1,10 @@
 <resources>
-    <string name="app_name">SmartLaPalma</string>
+    <string name="app_name">Smart LaPalma</string>
 
     <!--Activity names-->
     <string name="main_activity_name">Inicio</string>
+    <string name="contact_activity_name">Contacto</string>
+    <string name="about_activity_name">Acerca de</string>
 
     <!--Material Drawer-->
     <string name="resident">Residente</string>

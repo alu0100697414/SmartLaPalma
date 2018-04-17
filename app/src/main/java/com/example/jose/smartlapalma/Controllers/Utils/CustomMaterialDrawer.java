@@ -5,11 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import com.example.jose.smartlapalma.Models.SharedPreferencesKeys;
-import com.example.jose.smartlapalma.Models.User;
+import com.example.jose.smartlapalma.Models.UserType;
 import com.example.jose.smartlapalma.R;
 import com.example.jose.smartlapalma.Views.Activities.AboutActivity;
 import com.example.jose.smartlapalma.Views.Activities.ContactActivity;
@@ -71,9 +70,9 @@ public class CustomMaterialDrawer {
                             mEditor = mPrefs.edit();
 
                             if(profile.getName().toString().equals(mActivity.getString(R.string.tourist))){
-                                mEditor.putInt(SharedPreferencesKeys.USER_TYPE, User.TOURIST_USER);
+                                mEditor.putInt(SharedPreferencesKeys.USER_TYPE, UserType.TOURIST_USER);
                             } else {
-                                mEditor.putInt(SharedPreferencesKeys.USER_TYPE, User.RESIDENT_USER);
+                                mEditor.putInt(SharedPreferencesKeys.USER_TYPE, UserType.RESIDENT_USER);
                             }
 
                             mEditor.commit();
@@ -175,9 +174,9 @@ public class CustomMaterialDrawer {
                             mEditor = mPrefs.edit();
 
                             if(profile.getName().toString().equals(mActivity.getString(R.string.tourist))){
-                                mEditor.putInt(SharedPreferencesKeys.USER_TYPE, User.TOURIST_USER);
+                                mEditor.putInt(SharedPreferencesKeys.USER_TYPE, UserType.TOURIST_USER);
                             } else {
-                                mEditor.putInt(SharedPreferencesKeys.USER_TYPE, User.RESIDENT_USER);
+                                mEditor.putInt(SharedPreferencesKeys.USER_TYPE, UserType.RESIDENT_USER);
                             }
 
                             mEditor.commit();

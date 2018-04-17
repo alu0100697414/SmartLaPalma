@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "922833908332",
+    "firebase_url": "https://smart-la-palma.firebaseio.com",
+    "project_id": "smart-la-palma",
+    "storage_bucket": "smart-la-palma.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:922833908332:android:bc79dd72374086b5",
+        "android_client_info": {
+          "package_name": "com.example.jose.smartlapalma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "922833908332-rdt1djvgrmm38j577ku2srj3lo0oneu4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZijkODqNKCl4P2VjYKtDvvahbPBv4WxM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

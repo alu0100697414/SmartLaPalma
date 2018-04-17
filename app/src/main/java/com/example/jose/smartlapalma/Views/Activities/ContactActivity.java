@@ -98,7 +98,8 @@ public class ContactActivity extends AppCompatActivity {
 
         // Set data in textviews
         TextView test = findViewById(R.id.test);
-        test.setText((String) mContact.getmTextMessage().get("es"));
+        test.setText((String) mContact.getmTextMessage()
+                        .get(mPrefs.getString(SharedPreferencesKeys.CURRENT_LANGUAGE, "English")));
 
         // Hide spinner when data is loaded
         mProgressBar.setVisibility(View.GONE);

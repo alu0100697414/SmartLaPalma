@@ -19,4 +19,7 @@
     <string name="about">ACERCA DE</string>
     <string name="exit">SALIR</string>
 
+    <!--Contact Activity-->
+    <string name="internet_error">Ohh...\nHa fallado la conexión con el servidor\n:(</string>
+
 </resources>

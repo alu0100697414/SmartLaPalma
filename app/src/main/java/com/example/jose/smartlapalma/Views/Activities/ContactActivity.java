@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.jose.smartlapalma.Controllers.Utils.CustomMaterialDrawer;
+import com.example.jose.smartlapalma.Controllers.Utils.CustomUtils;
 import com.example.jose.smartlapalma.Models.Contact;
 import com.example.jose.smartlapalma.Models.SharedPreferencesKeys;
 import com.example.jose.smartlapalma.Models.UserType;
@@ -88,21 +89,47 @@ public class ContactActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.d(TAG, "The read failed: " + databaseError.getCode());
+
+                // Hide spinner when data is loaded
+                mProgressBar.setVisibility(View.GONE);
+
+                // Show error message in layout
+                TextView error = findViewById(R.id.error_request);
+                error.setVisibility(View.VISIBLE);
             }
         });
+
+        // Set error if network is noot available
+        checkNetworkStatus();
     }
 
     // This method sets firebase data in the layout
     private void setDataInView(){
 
-        // Set data in textviews
-        TextView test = findViewById(R.id.test);
-        test.setText((String) mContact.getmTextMessage()
-                        .get(mPrefs.getString(SharedPreferencesKeys.CURRENT_LANGUAGE, "English")));
-
         // Hide spinner when data is loaded
         mProgressBar.setVisibility(View.GONE);
+
+        // Hide error message possible network error
+        TextView error = findViewById(R.id.error_request);
+        error.setVisibility(View.GONE);
+
+        // Set data in textviews
+//        TextView test = findViewById(R.id.test);
+//        test.setText((String) mContact.getmTextMessage()
+//                        .get(mPrefs.getString(SharedPreferencesKeys.CURRENT_LANGUAGE, "English")));
+    }
+
+    private void checkNetworkStatus(){
+
+        if(!CustomUtils.isNetworkAvailable(this)){
+
+            // Hide spinner when data is loaded
+            mProgressBar.setVisibility(View.GONE);
+
+            // Hide error message possible network error
+            TextView error = findViewById(R.id.error_request);
+            error.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

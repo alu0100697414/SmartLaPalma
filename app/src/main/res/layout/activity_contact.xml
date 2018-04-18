@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.jose.smartlapalma.Views.Activities.ContactActivity">
 
+    <!-- Spinner when data is loading -->
     <LinearLayout
         android:id="@+id/linlaHeaderProgress"
         android:layout_width="fill_parent"
@@ -23,6 +24,7 @@
         </ProgressBar>
     </LinearLayout>
 
+    <!-- Content -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -42,10 +44,21 @@
 
         </android.support.design.widget.AppBarLayout>
 
+        <!--Error textview-->
         <TextView
-            android:id="@+id/test"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:id="@+id/error_request"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/internet_error"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="50dp"
+            android:visibility="gone"
+            android:textSize="28dp"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 

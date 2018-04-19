@@ -255,13 +255,25 @@ public class CustomMaterialDrawer {
 
     // This function open the contact screen
     private void openContactActivity(){
+
         Intent intent = new Intent(mActivity, ContactActivity.class);
+
+        if(!mActivity.getClass().getSimpleName().equals("MainActivity")){
+            mActivity.finish();
+        }
+
         mActivity.startActivity(intent);
     }
 
     // This function open the about screen
     private void openAboutActivity(){
+
         Intent intent = new Intent(mActivity, AboutActivity.class);
+
+        if(!mActivity.getClass().getSimpleName().equals("MainActivity")){
+            mActivity.finish();
+        }
+        
         mActivity.startActivity(intent);
     }
 

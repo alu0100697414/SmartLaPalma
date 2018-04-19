@@ -4,10 +4,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.jose.smartlapalma.Controllers.Utils.CustomMaterialDrawer;
@@ -30,6 +34,8 @@ public class AboutActivity extends AppCompatActivity {
     private SharedPreferences mPrefs;
 
     private LinearLayout mProgressBar;
+    private ViewGroup mAboutViewItem;
+    private ScrollView scrollView;
 
     private About mAbout;
     private int typeUser;
@@ -38,6 +44,8 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+        mAboutViewItem = findViewById(R.id.scroll_view_content);
+        scrollView = findViewById(R.id.about_scroll_view);
 
         // Toolbar
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
@@ -71,8 +79,29 @@ public class AboutActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                // Number of questions
+                int nQuestions = 0;
+
                 // Values are saved
-                // TODO: SAVE FIREBASE DATA IN ABOUT OBJECT
+                for (DataSnapshot eventSnapshot: dataSnapshot.getChildren()) {
+
+                    if(!eventSnapshot.getKey().equals(About.mIntroTextKey)){
+
+                        // Save question and answer
+                        mAbout.setmQuestion(
+                                (String) eventSnapshot.child(About.mQuestionKey).getValue());
+                        mAbout.setmAnswer(
+                                (String) eventSnapshot.child(About.mAnswerKey).getValue());
+
+                        // Add up a question
+                        nQuestions ++;
+                    }
+                }
+
+                mAbout.setmIntroText(
+                        (String) dataSnapshot.child(About.mIntroTextKey).getValue());
+
+                mAbout.setmTotalNumber(nQuestions);
 
                 // Update layout
                 setDataInView();
@@ -108,7 +137,37 @@ public class AboutActivity extends AppCompatActivity {
         errorImage.setVisibility(View.GONE);
 
         // Set data in view
-        // TODO: PUT DATA ON VIEW
+        TextView intro = findViewById(R.id.intro_textview);
+        intro.setText(mAbout.getmIntroText());
+
+        LayoutInflater inflater = LayoutInflater.from(this);
+        int id = R.layout.about_item;
+
+        // Add all the questions/answers
+        for(int i=0; i<mAbout.getmTotalNumber(); i++){
+
+            // Inflate about item
+            LinearLayout item = (LinearLayout) inflater.inflate(id, null, false);
+
+            // Set content for the item
+            TextView textView = item.findViewById(R.id.question_item);
+            textView.setText(mAbout.getmQuestions().get(i));
+
+            TextView answer = item.findViewById(R.id.answer_item);
+            answer.setText(mAbout.getmAnswers().get(i));
+
+            // Custom some styles
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+
+            params.leftMargin = CustomUtils.getDpValues(this, 25f);
+            params.rightMargin = CustomUtils.getDpValues(this, 25f);
+            item.setLayoutParams(params);
+
+            // Add view in parent layout
+            mAboutViewItem.addView(item);
+        }
     }
 
     private void checkNetworkStatus(){

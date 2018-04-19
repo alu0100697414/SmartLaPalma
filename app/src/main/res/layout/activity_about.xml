@@ -73,7 +73,26 @@
             android:src="@drawable/sadface"/>
 
         <!--Main layout elements-->
+        <ScrollView
+            android:id="@+id/about_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbarStyle="outsideInset" >
 
+            <LinearLayout
+                android:id="@+id/scroll_view_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/intro_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="25dp"
+                    android:textSize="18dp"/>
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 

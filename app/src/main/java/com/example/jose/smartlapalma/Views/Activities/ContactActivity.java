@@ -149,10 +149,4 @@ public class ContactActivity extends AppCompatActivity {
         super.onBackPressed();
         finish();
     }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        finish();
-    }
 }

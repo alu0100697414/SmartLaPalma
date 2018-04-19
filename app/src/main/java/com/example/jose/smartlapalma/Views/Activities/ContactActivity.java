@@ -96,8 +96,8 @@ public class ContactActivity extends AppCompatActivity {
                 mProgressBar.setVisibility(View.GONE);
 
                 // Show error message in layout
-                TextView error = findViewById(R.id.error_request);
-                error.setVisibility(View.VISIBLE);
+                ImageView errorImage = findViewById(R.id.error_imageview);
+                errorImage.setVisibility(View.VISIBLE);
             }
         });
 
@@ -114,6 +114,9 @@ public class ContactActivity extends AppCompatActivity {
         // Hide error message possible network error
         TextView error = findViewById(R.id.error_request);
         error.setVisibility(View.GONE);
+
+        ImageView errorImage = findViewById(R.id.error_imageview);
+        errorImage.setVisibility(View.GONE);
 
         // Set data in textviews
         TextView welcome = findViewById(R.id.welcome_textview);
@@ -138,9 +141,12 @@ public class ContactActivity extends AppCompatActivity {
             // Hide spinner when data is loaded
             mProgressBar.setVisibility(View.GONE);
 
-            // Hide error message possible network error
+            // Show error message possible network error
             TextView error = findViewById(R.id.error_request);
             error.setVisibility(View.VISIBLE);
+
+            ImageView errorImage = findViewById(R.id.error_imageview);
+            errorImage.setVisibility(View.VISIBLE);
         }
     }
 

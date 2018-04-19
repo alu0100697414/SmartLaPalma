@@ -20,6 +20,6 @@
     <string name="exit">SALIR</string>
 
     <!--Contact Activity-->
-    <string name="internet_error">Ohh...\nHa fallado la conexión con el servidor\n:(</string>
+    <string name="internet_error">Ohh... No tienes conexión a Internet</string>
 
 </resources>

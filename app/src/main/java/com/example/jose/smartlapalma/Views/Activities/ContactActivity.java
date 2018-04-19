@@ -1,7 +1,10 @@
 package com.example.jose.smartlapalma.Views.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +13,7 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jose.smartlapalma.Controllers.Utils.CustomMaterialDrawer;
 import com.example.jose.smartlapalma.Controllers.Utils.CustomUtils;
@@ -33,6 +37,7 @@ public class ContactActivity extends AppCompatActivity {
     private SharedPreferences mPrefs;
 
     private LinearLayout mProgressBar;
+    private ImageView mEmailImageView;
 
     private Contact mContact;
     private int typeUser;
@@ -132,6 +137,17 @@ public class ContactActivity extends AppCompatActivity {
         // Set visibility to email image icon
         ImageView emailImage = findViewById(R.id.email_imageview);
         emailImage.setVisibility(View.VISIBLE);
+
+        // Set image view clickable for gmail intent
+        mEmailImageView = findViewById(R.id.email_imageview);
+        mEmailImageView.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                // Send gmail intent
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto", mContact.getmEmail(), null));
+                startActivity(Intent.createChooser(emailIntent, null));
+            }
+        });
     }
 
     private void checkNetworkStatus(){

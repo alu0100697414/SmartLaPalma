@@ -35,7 +35,6 @@ public class AboutActivity extends AppCompatActivity {
 
     private LinearLayout mProgressBar;
     private ViewGroup mAboutViewItem;
-    private ScrollView scrollView;
 
     private About mAbout;
     private int typeUser;
@@ -45,7 +44,6 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         mAboutViewItem = findViewById(R.id.scroll_view_content);
-        scrollView = findViewById(R.id.about_scroll_view);
 
         // Toolbar
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);

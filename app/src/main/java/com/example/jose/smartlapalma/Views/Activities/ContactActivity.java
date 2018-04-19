@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -68,20 +69,21 @@ public class ContactActivity extends AppCompatActivity {
         mContact = new Contact();
 
         // Get Firebase data and set listener
-        DatabaseReference ref = database.getReference("contact/");
+        DatabaseReference ref = database.getReference("contact/" +
+                mPrefs.getString(SharedPreferencesKeys.CURRENT_LANGUAGE, "español"));
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 // Values are saved
                 mContact.setmWelcomeMessage(
-                        (HashMap) dataSnapshot.child(Contact.welcomeMessageKey).getValue());
+                        (String) dataSnapshot.child(Contact.welcomeMessageKey).getValue());
                 mContact.setmTextMessage(
-                        (HashMap) dataSnapshot.child(Contact.textMessageKey).getValue());
+                        (String) dataSnapshot.child(Contact.textMessageKey).getValue());
                 mContact.setmEmail(
-                        (HashMap) dataSnapshot.child(Contact.emailKey).getValue());
+                        (String) dataSnapshot.child(Contact.emailKey).getValue());
                 mContact.setmLastMessage(
-                        (HashMap) dataSnapshot.child(Contact.lastMessageKey).getValue());
+                        (String) dataSnapshot.child(Contact.lastMessageKey).getValue());
 
                 // Update layout
                 setDataInView();
@@ -114,9 +116,19 @@ public class ContactActivity extends AppCompatActivity {
         error.setVisibility(View.GONE);
 
         // Set data in textviews
-//        TextView test = findViewById(R.id.test);
-//        test.setText((String) mContact.getmTextMessage()
-//                        .get(mPrefs.getString(SharedPreferencesKeys.CURRENT_LANGUAGE, "English")));
+        TextView welcome = findViewById(R.id.welcome_textview);
+        TextView text = findViewById(R.id.text_textview);
+        TextView email = findViewById(R.id.email_textview);
+        TextView lastText = findViewById(R.id.last_text_textview);
+
+        welcome.setText((mContact.getmWelcomeMessage()));
+        text.setText(mContact.getmTextMessage());
+        email.setText(mContact.getmEmail());
+        lastText.setText(mContact.getmLastMessage());
+
+        // Set visibility to email image icon
+        ImageView emailImage = findViewById(R.id.email_imageview);
+        emailImage.setVisibility(View.VISIBLE);
     }
 
     private void checkNetworkStatus(){

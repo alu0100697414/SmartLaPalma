@@ -15,14 +15,14 @@ public class Contact {
     public static final String emailKey = "email";
     public static final String lastMessageKey = "goodbye";
 
-    private HashMap<String, String> mWelcomeMessage;
-    private HashMap<String, String> mTextMessage;
-    private HashMap<String, String> mEmail;
-    private HashMap<String, String> mLastMessage;
+    private String mWelcomeMessage;
+    private String mTextMessage;
+    private String mEmail;
+    private String mLastMessage;
 
     public Contact(){}
 
-    public Contact(HashMap welcome, HashMap text, HashMap email, HashMap last){
+    public Contact(String welcome, String text, String email, String last){
 
         this.mWelcomeMessage = welcome;
         this.mTextMessage = text;
@@ -30,35 +30,35 @@ public class Contact {
         this.mLastMessage = last;
     }
 
-    public void setmWelcomeMessage(HashMap mWelcomeMessage) {
+    public void setmWelcomeMessage(String mWelcomeMessage) {
         this.mWelcomeMessage = mWelcomeMessage;
     }
 
-    public void setmTextMessage(HashMap mTextMessage) {
+    public void setmTextMessage(String mTextMessage) {
         this.mTextMessage = mTextMessage;
     }
 
-    public void setmEmail(HashMap mEmail) {
+    public void setmEmail(String mEmail) {
         this.mEmail = mEmail;
     }
 
-    public void setmLastMessage(HashMap mLastMessage) {
+    public void setmLastMessage(String mLastMessage) {
         this.mLastMessage = mLastMessage;
     }
 
-    public HashMap getmWelcomeMessage() {
+    public String getmWelcomeMessage() {
         return mWelcomeMessage;
     }
 
-    public HashMap getmTextMessage() {
+    public String getmTextMessage() {
         return mTextMessage;
     }
 
-    public HashMap getmEmail() {
+    public String getmEmail() {
         return mEmail;
     }
 
-    public HashMap getmLastMessage() {
+    public String getmLastMessage() {
         return mLastMessage;
     }
 }

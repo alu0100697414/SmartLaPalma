@@ -3,6 +3,7 @@
 
     <!--Activity names-->
     <string name="main_activity_name">Inicio</string>
+    <string name="news_activity_name">Noticias</string>
     <string name="contact_activity_name">Contacto</string>
     <string name="about_activity_name">Acerca de</string>
 

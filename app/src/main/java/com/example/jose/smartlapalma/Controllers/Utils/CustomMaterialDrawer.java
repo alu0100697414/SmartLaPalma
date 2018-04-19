@@ -14,6 +14,7 @@ import com.example.jose.smartlapalma.R;
 import com.example.jose.smartlapalma.Views.Activities.AboutActivity;
 import com.example.jose.smartlapalma.Views.Activities.ContactActivity;
 import com.example.jose.smartlapalma.Views.Activities.MainActivity;
+import com.example.jose.smartlapalma.Views.Activities.NewsActivity;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -133,6 +134,10 @@ public class CustomMaterialDrawer {
                         // Menu actions
                         switch ((int) drawerItem.getIdentifier()){
 
+                            case 2: // Open news activity
+                                openNewsActivity();
+                                break;
+
                             case 6: // Open contact activity
                                 openContactActivity();
                                 break;
@@ -236,6 +241,10 @@ public class CustomMaterialDrawer {
                         // Menu actions
                         switch ((int) drawerItem.getIdentifier()){
 
+                            case 2: // Open news activity
+                                openNewsActivity();
+                                break;
+
                             case 6: // Open contact activity
                                 openContactActivity();
                                 break;
@@ -252,6 +261,18 @@ public class CustomMaterialDrawer {
                         return false;
                     }
                 }).build();
+    }
+
+    // This function open the news screen
+    private void openNewsActivity(){
+
+        Intent intent = new Intent(mActivity, NewsActivity.class);
+
+        if(!mActivity.getClass().getSimpleName().equals("MainActivity")){
+            mActivity.finish();
+        }
+
+        mActivity.startActivity(intent);
     }
 
     // This function open the contact screen

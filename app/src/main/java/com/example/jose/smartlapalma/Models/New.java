@@ -12,6 +12,13 @@ public class New {
     private String mText;
     private String mDate;
 
+    public New (String title, String description, String text, String date){
+        mTitle = title;
+        mDescription = description;
+        mText = text;
+        mDate = date;
+    }
+
     public void setmTitle(String mTitle) {
         this.mTitle = mTitle;
     }

@@ -8,11 +8,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.jose.smartlapalma.Controllers.Adapters.NewsListAdapter;
 import com.example.jose.smartlapalma.Controllers.Utils.CustomMaterialDrawer;
 import com.example.jose.smartlapalma.Controllers.Utils.CustomUtils;
-import com.example.jose.smartlapalma.Models.News;
+import com.example.jose.smartlapalma.Models.New;
 import com.example.jose.smartlapalma.Models.SharedPreferencesKeys;
 import com.example.jose.smartlapalma.Models.UserType;
 import com.example.jose.smartlapalma.R;
@@ -21,6 +23,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class NewsActivity extends AppCompatActivity {
 
@@ -31,8 +35,10 @@ public class NewsActivity extends AppCompatActivity {
 
     private LinearLayout mProgressBar;
 
-    private News mNews;
+    private ListView listView;
+    private NewsListAdapter mAdapter;
 
+    private ArrayList<New> mNewsList;
     private int typeUser;
 
     @Override
@@ -46,6 +52,10 @@ public class NewsActivity extends AppCompatActivity {
 
         mProgressBar = findViewById(R.id.linlaHeaderProgress);
         mProgressBar.setVisibility(View.VISIBLE);
+
+        // Init listview and arraylist
+        listView = findViewById(R.id.news_list);
+        mNewsList = new ArrayList<>();
 
         // Shared preferences
         mPrefs = getSharedPreferences(
@@ -62,9 +72,6 @@ public class NewsActivity extends AppCompatActivity {
             customMaterialDrawer.setTouristMode();
         }
 
-        // Init object where about data is saved
-        mNews = new News();
-
         // Get Firebase data and set listener
         DatabaseReference ref = database.getReference("news/" +
                 mPrefs.getString(SharedPreferencesKeys.CURRENT_LANGUAGE, "español"));
@@ -72,7 +79,18 @@ public class NewsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                Log.d(TAG, dataSnapshot.toString());
+                // Clear previous data
+                mNewsList.clear();
+
+                // Values are added to news list
+                for (DataSnapshot eventSnapshot: dataSnapshot.getChildren()) {
+                    mNewsList.add(new New(
+                            (String) eventSnapshot.child(New.titleNewKey).getValue(),
+                            (String) eventSnapshot.child(New.descriptionNewKey).getValue(),
+                            (String) eventSnapshot.child(New.textNewKey).getValue(),
+                            (String) eventSnapshot.child(New.dateNewKey).getValue()
+                    ));
+                }
 
                 // Update layout
                 setDataInView();
@@ -106,6 +124,10 @@ public class NewsActivity extends AppCompatActivity {
 
         ImageView errorImage = findViewById(R.id.error_imageview);
         errorImage.setVisibility(View.GONE);
+
+        // Set data in view
+        mAdapter = new NewsListAdapter(this, mNewsList);
+        listView.setAdapter(mAdapter);
     }
 
     private void checkNetworkStatus(){

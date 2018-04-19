@@ -13,6 +13,7 @@ import com.example.jose.smartlapalma.Models.UserType;
 import com.example.jose.smartlapalma.R;
 import com.example.jose.smartlapalma.Views.Activities.AboutActivity;
 import com.example.jose.smartlapalma.Views.Activities.ContactActivity;
+import com.example.jose.smartlapalma.Views.Activities.MainActivity;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -78,8 +79,8 @@ public class CustomMaterialDrawer {
 
                             mEditor.commit();
 
-                            // Activity is restarted
-                            restartActivity();
+                            // App is restarted
+                            restartApp();
                         }
 
                         return false;
@@ -182,8 +183,8 @@ public class CustomMaterialDrawer {
 
                             mEditor.commit();
 
-                            // Activity is restarted
-                            restartActivity();
+                            // App is restarted
+                            restartApp();
                         }
 
                         return false;
@@ -278,8 +279,9 @@ public class CustomMaterialDrawer {
     }
 
     // This function restarts the activity
-    private void restartActivity(){
-        Intent intent = mActivity.getIntent();
+    private void restartApp(){
+        Intent intent = new Intent(mActivity, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         mActivity.finish();
         mActivity.startActivity(intent);
     }

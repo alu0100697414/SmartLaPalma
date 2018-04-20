@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -58,10 +59,15 @@ public class NewsListAdapter extends ArrayAdapter<New> {
 
         final RelativeLayout background = listItem.findViewById(R.id.parent_new_list_item);
         final ImageView temporalImage = new ImageView(mContext);
+
+        final LinearLayout spinner = listItem.findViewById(R.id.linlaHeaderProgress);
+        spinner.setVisibility(View.VISIBLE);
+
         Picasso.with(mContext).load(currentNew.getmImageUrl())
                 .into(temporalImage, new com.squareup.picasso.Callback() {
                     @Override
                     public void onSuccess() {
+                        spinner.setVisibility(View.GONE);
                         background.setBackground(temporalImage.getDrawable());
                     }
 

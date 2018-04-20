@@ -3,8 +3,26 @@
     android:id="@+id/parent_new_list_item"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="@color/colorAccent"
+    android:background="@color/background_screen"
     android:layout_height="150dp">
+
+    <!-- Spinner when data is loading -->
+    <LinearLayout
+        android:id="@+id/linlaHeaderProgress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <ProgressBar
+            android:id="@+id/pbHeaderProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.Spinner"
+            android:background="@null">
+        </ProgressBar>
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"

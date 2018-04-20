@@ -1,6 +1,7 @@
 package com.example.jose.smartlapalma.Controllers.Adapters;
 
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -8,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.jose.smartlapalma.Models.New;
 import com.example.jose.smartlapalma.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +55,21 @@ public class NewsListAdapter extends ArrayAdapter<New> {
 
         TextView title = listItem.findViewById(R.id.title_item);
         title.setText(currentNew.getmTitle());
+
+        final RelativeLayout background = listItem.findViewById(R.id.parent_new_list_item);
+        final ImageView temporalImage = new ImageView(mContext);
+        Picasso.with(mContext).load(currentNew.getmImageUrl())
+                .into(temporalImage, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        background.setBackground(temporalImage.getDrawable());
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
 
         return listItem;
     }

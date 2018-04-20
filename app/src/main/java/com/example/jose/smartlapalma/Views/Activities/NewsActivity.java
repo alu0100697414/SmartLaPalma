@@ -2,6 +2,9 @@ package com.example.jose.smartlapalma.Views.Activities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +21,8 @@ import com.example.jose.smartlapalma.Models.New;
 import com.example.jose.smartlapalma.Models.SharedPreferencesKeys;
 import com.example.jose.smartlapalma.Models.UserType;
 import com.example.jose.smartlapalma.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -84,15 +89,19 @@ public class NewsActivity extends AppCompatActivity {
 
                 // Values are added to news list
                 for (DataSnapshot eventSnapshot: dataSnapshot.getChildren()) {
-                    mNewsList.add(new New(
+
+                    New currentNew = new New(
                             (String) eventSnapshot.child(New.titleNewKey).getValue(),
                             (String) eventSnapshot.child(New.descriptionNewKey).getValue(),
                             (String) eventSnapshot.child(New.textNewKey).getValue(),
-                            (String) eventSnapshot.child(New.dateNewKey).getValue()
-                    ));
+                            (String) eventSnapshot.child(New.dateNewKey).getValue(),
+                            (String) eventSnapshot.child(New.imageUrlKey).getValue()
+                    );
+
+                    mNewsList.add(currentNew);
                 }
 
-                // Update layout
+                // Get images of news
                 setDataInView();
             }
 

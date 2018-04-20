@@ -1,22 +1,27 @@
 package com.example.jose.smartlapalma.Models;
 
+import android.graphics.Bitmap;
+
 public class New {
 
     public static final String titleNewKey = "title";
     public static final String descriptionNewKey = "description";
     public static final String textNewKey = "text";
     public static final String dateNewKey = "date";
+    public static final String imageUrlKey = "image_url";
 
     private String mTitle;
     private String mDescription;
     private String mText;
     private String mDate;
+    private String mImageUrl;
 
-    public New (String title, String description, String text, String date){
+    public New (String title, String description, String text, String date, String imageUrl){
         mTitle = title;
         mDescription = description;
         mText = text;
         mDate = date;
+        mImageUrl = imageUrl;
     }
 
     public void setmTitle(String mTitle) {
@@ -35,6 +40,10 @@ public class New {
         this.mDate = mDate;
     }
 
+    public void setmImageUrl(String mImage) {
+        this.mImageUrl = mImage;
+    }
+
     public String getmTitle() {
         return mTitle;
     }
@@ -49,5 +58,9 @@ public class New {
 
     public String getmDate() {
         return mDate;
+    }
+
+    public String getmImageUrl() {
+        return mImageUrl;
     }
 }

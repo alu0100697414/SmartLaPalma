@@ -61,7 +61,22 @@ public class NewDetailActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Actions
+
+                // Customize string
+                Intent intent = getIntent();
+                String currentNew = intent.getStringExtra(New.titleNewKey).toUpperCase() + "\n\n" +
+                        intent.getStringExtra(New.descriptionNewKey) + "\n\n" +
+                        getString(R.string.for_more_info) + " (" +
+                        getString(R.string.app_url) + ")";
+
+                // Share new
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, currentNew);
+                sendIntent.setType("text/plain");
+
+                // Lanzamos el intent
+                startActivity(Intent.createChooser(sendIntent, getString(R.string.share_option)));
             }
         });
     }

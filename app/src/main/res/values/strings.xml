@@ -23,4 +23,9 @@
     <!--Contact Activity-->
     <string name="internet_error">Ohh... No tienes conexión a Internet</string>
 
+    <!--Detail New Activity-->
+    <string name="share_option">Seleccione una aplicación</string>
+    <string name="for_more_info">Puedes encontrar toda la noticia en la app Smart LaPalma</string>
+    <string name="app_url">app URL</string>
+
 </resources>

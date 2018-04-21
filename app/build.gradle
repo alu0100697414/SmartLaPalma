@@ -39,7 +39,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:12.0.1'
     implementation 'com.google.firebase:firebase-database:12.0.1'
 
-    compile group:'com.squareup.picasso', name:'picasso', version:'2.5.0'
+    implementation("com.mikepenz:materialdrawer:6.0.2@aar") {
+        transitive = true
+    }
+
+    implementation group: 'com.squareup.picasso', name: 'picasso', version: '2.5.0'
 }
 
 

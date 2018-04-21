@@ -22,22 +22,25 @@
         </activity>
         <activity
             android:name=".Views.Activities.MainActivity"
-            android:label="@string/main_activity_name"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"></activity>
+            android:label="@string/main_activity_name"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Views.Activities.ContactActivity"
-            android:label="@string/contact_activity_name"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:label="@string/contact_activity_name"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Views.Activities.AboutActivity"
-            android:label="@string/about_activity_name"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:label="@string/about_activity_name"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Views.Activities.NewsActivity"
+            android:configChanges="orientation"
             android:label="@string/news_activity_name"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Views.Activities.NewDetailActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
     </application>

@@ -48,7 +48,7 @@ public class NewsListAdapter extends ArrayAdapter<New> {
         }
 
         // Get current object
-        New currentNew = mNewsList.get(position);
+        final New currentNew = mNewsList.get(position);
 
         // Set values in textviews
         TextView date = listItem.findViewById(R.id.date_item);

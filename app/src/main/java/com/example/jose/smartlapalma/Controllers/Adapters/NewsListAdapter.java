@@ -41,11 +41,9 @@ public class NewsListAdapter extends ArrayAdapter<New> {
 
         View listItem = convertView;
 
-        // Creates view if it is not exist
-        if(listItem == null){
-            listItem = LayoutInflater.from(mContext)
-                    .inflate(R.layout.new_list_item, parent, false);
-        }
+        // Creates view
+        listItem = LayoutInflater.from(mContext)
+                .inflate(R.layout.new_list_item, parent, false);
 
         // Get current object
         final New currentNew = mNewsList.get(position);

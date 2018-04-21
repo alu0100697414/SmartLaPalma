@@ -155,6 +155,9 @@ public class NewsActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), NewDetailActivity.class);
                 intent.putExtra(New.titleNewKey, mNewsList.get(i).getmTitle());
                 intent.putExtra(New.imageUrlKey, mNewsList.get(i).getmImageUrl());
+                intent.putExtra(New.descriptionNewKey, mNewsList.get(i).getmDescription());
+                intent.putExtra(New.textNewKey, mNewsList.get(i).getmText());
+                intent.putExtra(New.dateNewKey, mNewsList.get(i).getmDate());
                 startActivity(intent);
             }
         });

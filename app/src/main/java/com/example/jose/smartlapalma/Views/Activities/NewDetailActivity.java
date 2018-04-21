@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.jose.smartlapalma.Models.New;
 import com.example.jose.smartlapalma.R;
@@ -39,6 +40,9 @@ public class NewDetailActivity extends AppCompatActivity {
 
         // Floating button
         setFloatingButtonAction();
+
+        // Set new data
+        setNewData();
     }
 
     private void updateActionBarValues(){
@@ -60,6 +64,19 @@ public class NewDetailActivity extends AppCompatActivity {
                 // Actions
             }
         });
+    }
+
+    private void setNewData(){
+
+        Intent intent = getIntent();
+
+        TextView description = findViewById(R.id.description);
+        TextView text = findViewById(R.id.text);
+        TextView date = findViewById(R.id.date);
+
+        description.setText(intent.getStringExtra(New.descriptionNewKey));
+        text.setText(intent.getStringExtra(New.textNewKey));
+        date.setText(intent.getStringExtra(New.dateNewKey));
     }
 
     @Override

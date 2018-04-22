@@ -14,8 +14,14 @@ import com.example.jose.smartlapalma.Models.OpenDataLaPalma;
 import com.example.jose.smartlapalma.Models.SharedPreferencesKeys;
 import com.example.jose.smartlapalma.Models.UserType;
 import com.example.jose.smartlapalma.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-public class BusActivity extends AppCompatActivity {
+public class BusActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final String TAG = "BusActivity";
 
@@ -47,6 +53,11 @@ public class BusActivity extends AppCompatActivity {
             customMaterialDrawer.setTouristMode();
         }
 
+        // Init Google Maps
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.g_map);
+        mapFragment.getMapAsync(this);
+
         // Call API
         Request.requestQueue = Volley.newRequestQueue(this);
         Request.getBusStops();
@@ -55,6 +66,12 @@ public class BusActivity extends AppCompatActivity {
     public static void loadData(){
         OpenDataLaPalma openDataLaPalma = OpenDataLaPalma.getInstance();
         Log.d(TAG, String.valueOf(openDataLaPalma.getmBusStopList().size()));
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        // actions
     }
 
     @Override

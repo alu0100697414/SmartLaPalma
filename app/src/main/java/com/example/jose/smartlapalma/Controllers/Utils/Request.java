@@ -33,8 +33,9 @@ public class Request {
                     @Override
                     public void onResponse(String response) {
 
-                        // Get instance of singleton class
+                        // Get instance of singleton class and clear previuos data
                         OpenDataLaPalma openDataLaPalma = OpenDataLaPalma.getInstance();
+                        openDataLaPalma.getmBusStopList().clear();
 
                         try {
                             // Convert string to JSON and get item json array

@@ -15,6 +15,7 @@ import com.example.jose.smartlapalma.Views.Activities.AboutActivity;
 import com.example.jose.smartlapalma.Views.Activities.ContactActivity;
 import com.example.jose.smartlapalma.Views.Activities.MainActivity;
 import com.example.jose.smartlapalma.Views.Activities.NewsActivity;
+import com.example.jose.smartlapalma.Views.Activities.TransportsActivity;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -138,6 +139,10 @@ public class CustomMaterialDrawer {
                                 openNewsActivity();
                                 break;
 
+                            case 4: // Open transports activity
+                                openTransportsActivity();
+                                break;
+
                             case 6: // Open contact activity
                                 openContactActivity();
                                 break;
@@ -245,6 +250,10 @@ public class CustomMaterialDrawer {
                                 openNewsActivity();
                                 break;
 
+                            case 4: // Open transports activity
+                                openTransportsActivity();
+                                break;
+
                             case 6: // Open contact activity
                                 openContactActivity();
                                 break;
@@ -279,6 +288,18 @@ public class CustomMaterialDrawer {
     private void openContactActivity(){
 
         Intent intent = new Intent(mActivity, ContactActivity.class);
+
+        if(!mActivity.getClass().getSimpleName().equals("MainActivity")){
+            mActivity.finish();
+        }
+
+        mActivity.startActivity(intent);
+    }
+
+    // This function open the transports screen
+    private void openTransportsActivity(){
+
+        Intent intent = new Intent(mActivity, TransportsActivity.class);
 
         if(!mActivity.getClass().getSimpleName().equals("MainActivity")){
             mActivity.finish();

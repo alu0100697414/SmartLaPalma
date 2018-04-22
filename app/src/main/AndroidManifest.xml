@@ -40,8 +40,13 @@
             android:configChanges="orientation"
             android:label="@string/news_activity_name"
             android:screenOrientation="portrait" />
-        <activity android:name=".Views.Activities.NewDetailActivity"
+        <activity
+            android:name=".Views.Activities.NewDetailActivity"
             android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Views.Activities.TransportsActivity"
+            android:configChanges="orientation"
+            android:label="@string/transports_activity_name"
             android:screenOrientation="portrait"/>
     </application>
 

@@ -35,4 +35,7 @@
     <string name="autobus_button">Autobús</string>
     <string name="intro_transports">Seleccione el transporte que desea consultar:</string>
 
+    <!--Bus Activity-->
+    <string name="snipped_intro">Líneas:</string>
+
 </resources>

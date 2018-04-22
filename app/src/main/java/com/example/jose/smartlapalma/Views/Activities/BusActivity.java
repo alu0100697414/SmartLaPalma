@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.Volley;
 import com.example.jose.smartlapalma.Controllers.Utils.CustomMaterialDrawer;
@@ -20,9 +21,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class BusActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class BusActivity extends AppCompatActivity implements OnMapReadyCallback,
+        GoogleMap.OnMarkerClickListener {
 
     private static final String TAG = "BusActivity";
 
@@ -69,22 +72,52 @@ public class BusActivity extends AppCompatActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
 
         // Configuration
+        Marker currentMarker;
+
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                 new LatLng(28.663663, -17.856308), 10));
 
         // Load bus stops in map
         OpenDataLaPalma openDataLaPalma = OpenDataLaPalma.getInstance();
 
-        Log.d(TAG, "aaa: " + openDataLaPalma.getmBusStopList().size());
-
         for(int i=0; i<openDataLaPalma.getmBusStopList().size(); i++){
-            Log.d(TAG, "aaa: " + openDataLaPalma.getmBusStopList().get(i).getmLat() + " " + openDataLaPalma.getmBusStopList().get(i).getmLng());
-            googleMap.addMarker(new MarkerOptions()
+            currentMarker = googleMap.addMarker(new MarkerOptions()
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
-                    .anchor(0.0f, 1.0f) // Anchors the marker on the bottom left
+                    .title(openDataLaPalma.getmBusStopList().get(i).getmName())
+                    .anchor(0.0f, 1.0f)
                     .position(new LatLng(openDataLaPalma.getmBusStopList().get(i).getmLat(),
                                          openDataLaPalma.getmBusStopList().get(i).getmLng())));
+
+            currentMarker.setTag(openDataLaPalma.getmBusStopList().get(i).getmId());
+
+            googleMap.setOnMarkerClickListener(this);
         }
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+
+        // Retrieve the data from the marker.
+        Integer tag = (Integer) marker.getTag();
+
+        // Get lines from the maker
+        OpenDataLaPalma openDataLaPalma = OpenDataLaPalma.getInstance();
+
+        String lines = "";
+        for(int i=0; i<openDataLaPalma.getmBusStopList().size(); i++){
+
+            if(openDataLaPalma.getmBusStopList().get(i).getmId() == tag){
+                lines = getString(R.string.snipped_intro) + " " +
+                        openDataLaPalma.getmBusStopList().get(i).getmLine();
+            }
+        }
+
+        // Show toast with the lines
+        if(!lines.isEmpty()){
+            Toast.makeText(this, lines, Toast.LENGTH_SHORT).show();
+        }
+
+        return false;
     }
 
     @Override

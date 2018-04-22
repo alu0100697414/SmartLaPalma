@@ -37,4 +37,44 @@ public class CustomUtils {
         float fpixels = metrics.density * dp;
         return (int) (fpixels + 0.5f);
     }
+
+    /****
+     * Convert latitude of Open Data La Palma in latitude for Google Maps.
+     * @param latitude
+     * @return
+     */
+    public static double getLat(String latitude){
+
+        // Detele letter
+        latitude = latitude.substring(0, latitude.length() - 1);
+
+        // Divide in degrees, minutes and seconds
+        String[] temp = latitude.split(" ");
+
+        double degrees = Double.valueOf(temp[0]);
+        double minutes = Double.valueOf(temp[1]);
+        double seconds = Double.valueOf(temp[2].replaceFirst(",", "."));
+
+        return Math.signum(degrees) * (Math.abs(degrees) + (minutes / 60.0) + (seconds / 3600.0));
+    }
+
+    /****
+     * Convert longitude of Open Data La Palma in longitude for Google Maps.
+     * @param longitude
+     * @return
+     */
+    public static double getLng(String longitude){
+
+        // Detele letter
+        longitude = longitude.substring(0, longitude.length() - 1);
+
+        // Divide in degrees, minutes and seconds
+        String[] temp = longitude.split(" ");
+
+        double degrees = Double.valueOf(temp[0].replaceFirst("0", "-"));
+        double minutes = Double.valueOf(temp[1]);
+        double seconds = Double.valueOf(temp[2].replaceFirst(",", "."));
+
+        return Math.signum(degrees) * (Math.abs(degrees) + (minutes / 60.0) + (seconds / 3600.0));
+    }
 }

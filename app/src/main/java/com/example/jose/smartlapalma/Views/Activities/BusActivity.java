@@ -18,6 +18,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -57,10 +58,6 @@ public class BusActivity extends AppCompatActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.g_map);
         mapFragment.getMapAsync(this);
-
-        // Call API
-        Request.requestQueue = Volley.newRequestQueue(this);
-        Request.getBusStops();
     }
 
     public static void loadData(){
@@ -71,7 +68,23 @@ public class BusActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
-        // actions
+        // Configuration
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                new LatLng(28.663663, -17.856308), 10));
+
+        // Load bus stops in map
+        OpenDataLaPalma openDataLaPalma = OpenDataLaPalma.getInstance();
+
+        Log.d(TAG, "aaa: " + openDataLaPalma.getmBusStopList().size());
+
+        for(int i=0; i<openDataLaPalma.getmBusStopList().size(); i++){
+            Log.d(TAG, "aaa: " + openDataLaPalma.getmBusStopList().get(i).getmLat() + " " + openDataLaPalma.getmBusStopList().get(i).getmLng());
+            googleMap.addMarker(new MarkerOptions()
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
+                    .anchor(0.0f, 1.0f) // Anchors the marker on the bottom left
+                    .position(new LatLng(openDataLaPalma.getmBusStopList().get(i).getmLat(),
+                                         openDataLaPalma.getmBusStopList().get(i).getmLng())));
+        }
     }
 
     @Override

@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.android.volley.toolbox.Volley;
+import com.example.jose.smartlapalma.Controllers.Utils.Request;
 import com.example.jose.smartlapalma.Models.SharedPreferencesKeys;
 import com.example.jose.smartlapalma.Models.UserType;
 import com.example.jose.smartlapalma.R;
@@ -34,6 +36,10 @@ public class SplashActivity extends AppCompatActivity {
         mEditor.putString(SharedPreferencesKeys.CURRENT_LANGUAGE,
                 Locale.getDefault().getDisplayLanguage().toString());
         mEditor.commit();
+
+        // Call API for bus stops
+        Request.requestQueue = Volley.newRequestQueue(this);
+        Request.getBusStops();
 
         // Go to main activity
         startActivity(new Intent(this, MainActivity.class));

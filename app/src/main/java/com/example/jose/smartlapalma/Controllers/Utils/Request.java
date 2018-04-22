@@ -1,5 +1,6 @@
 package com.example.jose.smartlapalma.Controllers.Utils;
 
+import android.app.Activity;
 import android.util.Log;
 
 import com.android.volley.RequestQueue;
@@ -23,7 +24,7 @@ public class Request {
 
     private static final String BUS_STOPS_URL = "https://services.arcgis.com/hkQNLKNeDVYBjvFE/" +
             "arcgis/rest/services/Transportes/FeatureServer/1/query?where=1%3D1&outFields=ID," +
-            "LATITUD,LONGITUD,PARADA,LINEAS&returnGeometry=false&outSR=4326&f=json";
+            "PARADA,DMSLat,DMSLon,LINEAS&returnGeometry=false&outSR=4326&f=json";
 
     // Get JSON with bus stops of the island
     public static void getBusStops(){
@@ -47,13 +48,24 @@ public class Request {
 
                                 JSONObject currentObject = jArray.getJSONObject(i);
 
-                                openDataLaPalma.getmBusStopList().add(new BusStop(
-                                        currentObject.getJSONObject(BusStop.mAttributesKey).getInt(BusStop.mIdKey),
-                                        currentObject.getJSONObject(BusStop.mAttributesKey).getString(BusStop.mLatKey),
-                                        currentObject.getJSONObject(BusStop.mAttributesKey).getString(BusStop.mLngKey),
-                                        currentObject.getJSONObject(BusStop.mAttributesKey).getString(BusStop.mNameKey),
-                                        currentObject.getJSONObject(BusStop.mAttributesKey).getString(BusStop.mLineKey)
-                                ));
+                                String latitude = currentObject.getJSONObject(BusStop.mAttributesKey).getString(BusStop.mLatKey);
+                                String longitude = currentObject.getJSONObject(BusStop.mAttributesKey).getString(BusStop.mLngKey);
+
+                                if(!latitude.isEmpty() && !longitude.isEmpty()){
+
+                                    // Get latitude and longitude in double
+                                    double customLat = CustomUtils.getLat(latitude);
+                                    double customLng = CustomUtils.getLng(longitude);
+
+                                    // Save the stop
+                                    openDataLaPalma.getmBusStopList().add(new BusStop(
+                                            currentObject.getJSONObject(BusStop.mAttributesKey).getInt(BusStop.mIdKey),
+                                            customLat,
+                                            customLng,
+                                            currentObject.getJSONObject(BusStop.mAttributesKey).getString(BusStop.mNameKey),
+                                            currentObject.getJSONObject(BusStop.mAttributesKey).getString(BusStop.mLineKey)
+                                    ));
+                                }
                             }
 
                             BusActivity.loadData();

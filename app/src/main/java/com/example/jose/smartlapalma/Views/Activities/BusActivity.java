@@ -5,17 +5,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
+import com.android.volley.toolbox.Volley;
 import com.example.jose.smartlapalma.Controllers.Utils.CustomMaterialDrawer;
+import com.example.jose.smartlapalma.Controllers.Utils.Request;
 import com.example.jose.smartlapalma.Models.SharedPreferencesKeys;
 import com.example.jose.smartlapalma.Models.UserType;
 import com.example.jose.smartlapalma.R;
 
-public class TransportsActivity extends AppCompatActivity {
+public class BusActivity extends AppCompatActivity {
 
-    private final String TAG = "TransportsActivity";
+    private final String TAG = "BusActivity";
 
     private SharedPreferences mPrefs;
 
@@ -24,7 +24,7 @@ public class TransportsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transports);
+        setContentView(R.layout.activity_bus);
 
         // Toolbar
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
@@ -45,26 +45,15 @@ public class TransportsActivity extends AppCompatActivity {
             customMaterialDrawer.setTouristMode();
         }
 
-        // Set click listeners to buttons
-        setBusButtonListener();
-    }
-
-    private void setBusButtonListener(){
-
-        Button button = findViewById(R.id.bus_button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Go to bus activity
-                finish();
-                startActivity(new Intent(getApplicationContext(), BusActivity.class));
-            }
-        });
+        // Call API
+        Request.requestQueue = Volley.newRequestQueue(this);
+        Request.getBusStops();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+        startActivity(new Intent(getApplicationContext(), TransportsActivity.class));
     }
 }

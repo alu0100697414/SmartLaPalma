@@ -5,17 +5,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.android.volley.toolbox.Volley;
 import com.example.jose.smartlapalma.Controllers.Utils.CustomMaterialDrawer;
 import com.example.jose.smartlapalma.Controllers.Utils.Request;
+import com.example.jose.smartlapalma.Models.OpenDataLaPalma;
 import com.example.jose.smartlapalma.Models.SharedPreferencesKeys;
 import com.example.jose.smartlapalma.Models.UserType;
 import com.example.jose.smartlapalma.R;
 
 public class BusActivity extends AppCompatActivity {
 
-    private final String TAG = "BusActivity";
+    private static final String TAG = "BusActivity";
 
     private SharedPreferences mPrefs;
 
@@ -48,6 +50,11 @@ public class BusActivity extends AppCompatActivity {
         // Call API
         Request.requestQueue = Volley.newRequestQueue(this);
         Request.getBusStops();
+    }
+
+    public static void loadData(){
+        OpenDataLaPalma openDataLaPalma = OpenDataLaPalma.getInstance();
+        Log.d(TAG, String.valueOf(openDataLaPalma.getmBusStopList().size()));
     }
 
     @Override

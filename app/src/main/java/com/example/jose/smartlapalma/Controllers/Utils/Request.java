@@ -7,7 +7,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.example.jose.smartlapalma.Models.BusStop;
+import com.example.jose.smartlapalma.Models.OpenDataLaPalma;
+import com.example.jose.smartlapalma.Views.Activities.BusActivity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Request {
@@ -17,8 +22,8 @@ public class Request {
     public static RequestQueue requestQueue;
 
     private static final String BUS_STOPS_URL = "https://services.arcgis.com/hkQNLKNeDVYBjvFE/" +
-            "arcgis/rest/services/Transportes/FeatureServer/1/query?where=1%3D1&outFields=OBJECTID," +
-            "ID,LATITUD,LONGITUD,PARADA,LINEAS&returnGeometry=false&outSR=4326&f=json";
+            "arcgis/rest/services/Transportes/FeatureServer/1/query?where=1%3D1&outFields=ID," +
+            "LATITUD,LONGITUD,PARADA,LINEAS&returnGeometry=false&outSR=4326&f=json";
 
     // Get JSON with bus stops of the island
     public static void getBusStops(){
@@ -27,16 +32,32 @@ public class Request {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Convert response to json object
+
+                        // Get instance of singleton class
+                        OpenDataLaPalma openDataLaPalma = OpenDataLaPalma.getInstance();
+
                         try {
-
+                            // Convert string to JSON and get item json array
                             JSONObject obj = new JSONObject(response);
+                            JSONArray jArray = obj.getJSONArray(BusStop.mFeaturesKey);
 
-                            Log.d(TAG, obj.toString());
-                            Log.d(TAG, obj.getString("features"));
+                            // Save items in singleton
+                            for (int i=0; i<jArray.length(); i++) {
 
+                                JSONObject currentObject = jArray.getJSONObject(i);
+
+                                openDataLaPalma.getmBusStopList().add(new BusStop(
+                                        currentObject.getJSONObject(BusStop.mAttributesKey).getInt(BusStop.mIdKey),
+                                        currentObject.getJSONObject(BusStop.mAttributesKey).getString(BusStop.mLatKey),
+                                        currentObject.getJSONObject(BusStop.mAttributesKey).getString(BusStop.mLngKey),
+                                        currentObject.getJSONObject(BusStop.mAttributesKey).getString(BusStop.mNameKey),
+                                        currentObject.getJSONObject(BusStop.mAttributesKey).getString(BusStop.mLineKey)
+                                ));
+                            }
+
+                            BusActivity.loadData();
                         } catch (Throwable t) {
-                            Log.e(TAG, "error while parsing the json.");
+                            Log.e(TAG, "Error while parsing the json.");
                         }
                     }
                 },

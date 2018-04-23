@@ -38,4 +38,13 @@
     <!--Bus Activity-->
     <string name="snipped_intro">Líneas:</string>
 
+    <!--Errors-->
+    <string name="gps_conection_error">Se ha producido un error al obtener la posición GPS</string>
+    <string name="gps_not_available">No se mostrará su ubicación en el mapa</string>
+
+    <!--GPS alert dialog-->
+    <string name="text_gps_dialog">Su GPS se encuentra desactivado. ¿Desea activarlo?</string>
+    <string name="yes">SÍ</string>
+    <string name="no">NO</string>
+
 </resources>

@@ -47,6 +47,7 @@ public class TransportsActivity extends AppCompatActivity {
 
         // Set click listeners to buttons
         setBusButtonListener();
+        setTaxiButtonListener();
     }
 
     private void setBusButtonListener(){
@@ -58,6 +59,19 @@ public class TransportsActivity extends AppCompatActivity {
                 // Go to bus activity
                 finish();
                 startActivity(new Intent(getApplicationContext(), BusActivity.class));
+            }
+        });
+    }
+
+    private void setTaxiButtonListener(){
+
+        Button button = findViewById(R.id.taxi_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Go to bus activity
+                finish();
+                startActivity(new Intent(getApplicationContext(), TaxiActivity.class));
             }
         });
     }

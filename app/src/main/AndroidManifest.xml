@@ -3,8 +3,8 @@
     package="com.example.jose.smartlapalma">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -12,13 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBYuiUVZkXZGrWs9rTuTWoIlufskyvgnIQ"/>
+            android:value="AIzaSyBYuiUVZkXZGrWs9rTuTWoIlufskyvgnIQ" />
 
         <activity
             android:name=".Views.Activities.SplashActivity"
@@ -59,10 +58,15 @@
             android:configChanges="orientation"
             android:label="@string/transports_activity_name"
             android:screenOrientation="portrait" />
-        <activity android:name=".Views.Activities.BusActivity"
+        <activity
+            android:name=".Views.Activities.BusActivity"
             android:configChanges="orientation"
             android:label="@string/bus_activity_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity android:name=".Views.Activities.TaxiActivity"
+            android:configChanges="orientation"
+            android:label="@string/taxi_activity_name"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

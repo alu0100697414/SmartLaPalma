@@ -8,6 +8,7 @@
     <string name="about_activity_name">Acerca de</string>
     <string name="transports_activity_name">Transporte público</string>
     <string name="bus_activity_name">Paradas de autobús</string>
+    <string name="taxi_activity_name">Paradas de taxi</string>
 
     <!--Material Drawer-->
     <string name="resident">Residente</string>
@@ -37,6 +38,10 @@
 
     <!--Bus Activity-->
     <string name="snipped_intro">Líneas:</string>
+
+    <!--Taxi Activity-->
+    <string name="taxi_toast">Teléfono:</string>
+    <string name="phone_not_available">Teléfono no disponible</string>
 
     <!--Errors-->
     <string name="gps_conection_error">Se ha producido un error al obtener la posición GPS</string>

@@ -40,6 +40,7 @@ public class SplashActivity extends AppCompatActivity {
         // Call API for bus stops
         Request.requestQueue = Volley.newRequestQueue(this);
         Request.getBusStops();
+        Request.getTaxiStops();
 
         // Go to main activity
         startActivity(new Intent(this, MainActivity.class));

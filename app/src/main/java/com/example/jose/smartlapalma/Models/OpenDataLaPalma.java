@@ -8,11 +8,13 @@ public class OpenDataLaPalma {
     private static OpenDataLaPalma mOpenDataLaPalma;
 
     private List<BusStop> mBusStopList;
+    private List<TaxiStop> mTaxiStopList;
 
     // Private constructor
     private OpenDataLaPalma(){
 
         mBusStopList = new ArrayList<>();
+        mTaxiStopList = new ArrayList<>();
     }
 
     // Instance
@@ -31,5 +33,13 @@ public class OpenDataLaPalma {
 
     public void setmBusStopList(List<BusStop> mBusStopList) {
         this.mBusStopList = mBusStopList;
+    }
+
+    public List<TaxiStop> getmTaxiStopList() {
+        return mTaxiStopList;
+    }
+
+    public void setmTaxiStopList(List<TaxiStop> mTaxiStopList) {
+        this.mTaxiStopList = mTaxiStopList;
     }
 }

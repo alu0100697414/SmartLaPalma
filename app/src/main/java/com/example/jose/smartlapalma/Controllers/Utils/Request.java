@@ -29,6 +29,27 @@ public class Request {
             "arcgis/rest/services/Transportes/FeatureServer/0/query?where=1%3D1&outFields=Id," +
             "Municipio,Telefono,Direccion,Nombre&returnGeometry=false&outSR=4326&f=json";
 
+    private static final String TOURIST_ACCOMMODATION_URL = "https://services.arcgis.com/" +
+            "hkQNLKNeDVYBjvFE/arcgis/rest/services/Alojamientos_turisticos/FeatureServer/0/" +
+            "query?where=1%3D1&outFields=ID,NOMBRE,TELEFONO,UTM_X,UTM_Y&returnGeometry=false&" +
+            "outSR=4326&f=json";
+
+    private static final String CHURCH_URL = "https://services.arcgis.com/hkQNLKNeDVYBjvFE/" +
+            "arcgis/rest/services/Iglesias_Patrimonio/FeatureServer/0/query?where=1%3D1&outFields" +
+            "=OBJECTID,NOMBRE,DIRECCICN,UTM_X,UTM_Y&returnGeometry=false&outSR=4326&f=json";
+
+    private static final String ARCHEOLOGICAL_SITE_URL = "https://services.arcgis.com/" +
+            "hkQNLKNeDVYBjvFE/arcgis/rest/services/BIC/FeatureServer/3/query?where=1%3D1&outFields" +
+            "=OBJECTID,Nombre,Dirección,UTM_X,UTM_Y&returnGeometry=false&outSR=4326&f=json";
+
+    private static final String LIBRARY_URL = "https://services.arcgis.com/hkQNLKNeDVYBjvFE/" +
+            "arcgis/rest/services/bibliotecas/FeatureServer/0/query?where=1%3D1&outFields=" +
+            "OBJECTID,NOMBRE,DIRECCIàN,UTM_X,UTM_Y&returnGeometry=false&outSR=4326&f=json";
+
+    private static final String MONUMENT_URL = "https://services.arcgis.com/hkQNLKNeDVYBjvFE/" +
+            "arcgis/rest/services/BIC/FeatureServer/1/query?where=1%3D1&outFields=OBJECTID," +
+            "Nombre,Dirección,UTM_X,UTM_Y&returnGeometry=false&outSR=4326&f=json";
+
     // Get JSON with bus stops of the island
     public static void getBusStops(){
 

@@ -49,6 +49,32 @@ public class GetApplicationDataTask extends AsyncTask<Void, Integer, Boolean> {
             catch (InterruptedException e) { e.printStackTrace(); }
         }
 
+        // Get lat/lng to taxi stops from geocoder
+        if(Geocoder.isPresent()){
+
+            Geocoder geocoder = new Geocoder(mContext, Locale.getDefault());
+            Log.d(TAG, String.valueOf(mOpenDataLaPalma.getmTaxiStopList().size()));
+
+            for (int i = 0; i < mOpenDataLaPalma.getmTaxiStopList().size(); i++) {
+
+                try {
+                    // Try to get lat/lng from a direction
+                    List<Address> addresses = geocoder.getFromLocationName(
+                            mOpenDataLaPalma.getmTaxiStopList().get(i).getmDirection(), 1);
+
+                    if(!addresses.isEmpty()){
+                        // Save lat/lng
+                        mOpenDataLaPalma.getmTaxiStopList().get(i).setmLat(
+                                addresses.get(0).getLatitude());
+                        mOpenDataLaPalma.getmTaxiStopList().get(i).setmLng(
+                                addresses.get(0).getLongitude());
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
         return true;
     }
 
@@ -56,32 +82,6 @@ public class GetApplicationDataTask extends AsyncTask<Void, Integer, Boolean> {
     protected void onPostExecute(Boolean result) {
 
         if(result){
-
-            // Get lat/lng to taxi stops from geocoder
-            if(Geocoder.isPresent()){
-
-                Geocoder geocoder = new Geocoder(mContext, Locale.getDefault());
-                Log.d(TAG, String.valueOf(mOpenDataLaPalma.getmTaxiStopList().size()));
-
-                for (int i = 0; i < mOpenDataLaPalma.getmTaxiStopList().size(); i++) {
-
-                    try {
-                        // Try to get lat/lng from a direction
-                        List<Address> addresses = geocoder.getFromLocationName(
-                                mOpenDataLaPalma.getmTaxiStopList().get(i).getmDirection(), 1);
-
-                        if(!addresses.isEmpty()){
-                            // Save lat/lng
-                            mOpenDataLaPalma.getmTaxiStopList().get(i).setmLat(
-                                    addresses.get(0).getLatitude());
-                            mOpenDataLaPalma.getmTaxiStopList().get(i).setmLng(
-                                    addresses.get(0).getLongitude());
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
 
             // Go to main activity
             mContext.startActivity(new Intent(mContext, MainActivity.class));

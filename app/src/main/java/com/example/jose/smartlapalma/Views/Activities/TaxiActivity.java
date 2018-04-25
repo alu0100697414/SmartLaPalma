@@ -20,6 +20,7 @@ import com.example.jose.smartlapalma.Controllers.Utils.CustomMaterialDrawer;
 import com.example.jose.smartlapalma.Controllers.Utils.UserLocation;
 import com.example.jose.smartlapalma.Models.OpenDataLaPalma;
 import com.example.jose.smartlapalma.Models.SharedPreferencesKeys;
+import com.example.jose.smartlapalma.Models.TaxiStop;
 import com.example.jose.smartlapalma.Models.UserType;
 import com.example.jose.smartlapalma.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -39,7 +40,7 @@ import java.util.Locale;
 public class TaxiActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleMap.OnMarkerClickListener {
 
-    private static final String TAG = "BusActivity";
+    private static final String TAG = "TaxiActivity";
 
     private final int REQUEST_PERMISSION_LOCATION = 101;
     private final int RESULT_GPS_CODE = 102;
@@ -97,28 +98,21 @@ public class TaxiActivity extends AppCompatActivity implements OnMapReadyCallbac
         uiSettings.setZoomControlsEnabled(true);
 
         // Load bus stops in map
-        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-
         OpenDataLaPalma openDataLaPalma = OpenDataLaPalma.getInstance();
 
         for (int i = 0; i < openDataLaPalma.getmTaxiStopList().size(); i++) {
 
-            try {
-                List<Address> addresses = geocoder.getFromLocationName(
-                        openDataLaPalma.getmTaxiStopList().get(i).getmDirection(), 1);
+            if(openDataLaPalma.getmTaxiStopList().get(i).getmLat() != TaxiStop.DEFAULT_COORDINATES_VALUE
+                    && openDataLaPalma.getmTaxiStopList().get(i).getmLng() != TaxiStop.DEFAULT_COORDINATES_VALUE){
 
-                if(!addresses.isEmpty()){
-                    currentMarker = googleMap.addMarker(new MarkerOptions()
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
-                            .title(openDataLaPalma.getmTaxiStopList().get(i).getmName())
-                            .anchor(0.0f, 1.0f)
-                            .position(new LatLng(addresses.get(0).getLatitude(),
-                                    addresses.get(0).getLongitude())));
+                currentMarker = googleMap.addMarker(new MarkerOptions()
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
+                        .title(openDataLaPalma.getmTaxiStopList().get(i).getmName())
+                        .anchor(0.0f, 1.0f)
+                        .position(new LatLng(openDataLaPalma.getmTaxiStopList().get(i).getmLat(),
+                                openDataLaPalma.getmTaxiStopList().get(i).getmLng())));
 
-                    currentMarker.setTag(openDataLaPalma.getmTaxiStopList().get(i).getmId());
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+                currentMarker.setTag(openDataLaPalma.getmTaxiStopList().get(i).getmId());
             }
         }
 

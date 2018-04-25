@@ -1,12 +1,10 @@
 package com.example.jose.smartlapalma.Controllers.Utils;
 
-import android.app.Activity;
 import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.example.jose.smartlapalma.Models.BusStop;
 import com.example.jose.smartlapalma.Models.OpenDataLaPalma;
@@ -15,7 +13,6 @@ import com.example.jose.smartlapalma.Views.Activities.BusActivity;
 import com.example.jose.smartlapalma.Views.Activities.TaxiActivity;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Request {
@@ -78,12 +75,14 @@ public class Request {
                         } catch (Throwable t) {
                             Log.e(TAG, "Error while parsing the json.");
                         }
+
+                        GetApplicationDataTask.setBusStopCallState(true);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        GetApplicationDataTask.setBusStopCallState(true);
                     }
         });
 
@@ -129,12 +128,14 @@ public class Request {
                         } catch (Throwable t) {
                             Log.e(TAG, "Error while parsing the json.");
                         }
+
+                        GetApplicationDataTask.setTaxiStopCallState(true);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        GetApplicationDataTask.setTaxiStopCallState(true);
                     }
                 });
 

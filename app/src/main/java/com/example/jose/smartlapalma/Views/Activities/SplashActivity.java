@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.android.volley.toolbox.Volley;
+import com.example.jose.smartlapalma.Controllers.Utils.GetApplicationDataTask;
 import com.example.jose.smartlapalma.Controllers.Utils.Request;
+import com.example.jose.smartlapalma.Models.OpenDataLaPalma;
 import com.example.jose.smartlapalma.Models.SharedPreferencesKeys;
 import com.example.jose.smartlapalma.Models.UserType;
 import com.example.jose.smartlapalma.R;
@@ -37,13 +39,11 @@ public class SplashActivity extends AppCompatActivity {
                 Locale.getDefault().getDisplayLanguage().toString());
         mEditor.commit();
 
-        // Call API for bus stops
-        Request.requestQueue = Volley.newRequestQueue(this);
-        Request.getBusStops();
-        Request.getTaxiStops();
+        // Call APIs thread
+        OpenDataLaPalma openDataLaPalma = OpenDataLaPalma.getInstance();
 
-        // Go to main activity
-        startActivity(new Intent(this, MainActivity.class));
+        GetApplicationDataTask apiCalls = new GetApplicationDataTask(this, openDataLaPalma);
+        apiCalls.execute();
     }
 
     @Override

@@ -47,6 +47,7 @@
     <!--Errors-->
     <string name="gps_conection_error">Se ha producido un error al obtener la posición GPS</string>
     <string name="gps_not_available">No se mostrará su ubicación en el mapa</string>
+    <string name="items_not_found">No se han podido cargar los datos</string>
 
     <!--GPS alert dialog-->
     <string name="text_gps_dialog">Su GPS se encuentra desactivado. ¿Desea activarlo?</string>

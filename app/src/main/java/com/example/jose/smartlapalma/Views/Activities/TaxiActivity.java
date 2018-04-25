@@ -100,23 +100,30 @@ public class TaxiActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Load bus stops in map
         OpenDataLaPalma openDataLaPalma = OpenDataLaPalma.getInstance();
 
-        for (int i = 0; i < openDataLaPalma.getmTaxiStopList().size(); i++) {
+        if(openDataLaPalma.getmTaxiStopList().size() > 0){
 
-            if(openDataLaPalma.getmTaxiStopList().get(i).getmLat() != TaxiStop.DEFAULT_COORDINATES_VALUE
-                    && openDataLaPalma.getmTaxiStopList().get(i).getmLng() != TaxiStop.DEFAULT_COORDINATES_VALUE){
+            // Put markers in map
+            for (int i = 0; i < openDataLaPalma.getmTaxiStopList().size(); i++) {
 
-                currentMarker = googleMap.addMarker(new MarkerOptions()
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
-                        .title(openDataLaPalma.getmTaxiStopList().get(i).getmName())
-                        .anchor(0.0f, 1.0f)
-                        .position(new LatLng(openDataLaPalma.getmTaxiStopList().get(i).getmLat(),
-                                openDataLaPalma.getmTaxiStopList().get(i).getmLng())));
+                if(openDataLaPalma.getmTaxiStopList().get(i).getmLat() != TaxiStop.DEFAULT_COORDINATES_VALUE
+                        && openDataLaPalma.getmTaxiStopList().get(i).getmLng() != TaxiStop.DEFAULT_COORDINATES_VALUE){
 
-                currentMarker.setTag(openDataLaPalma.getmTaxiStopList().get(i).getmId());
+                    currentMarker = googleMap.addMarker(new MarkerOptions()
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
+                            .title(openDataLaPalma.getmTaxiStopList().get(i).getmName())
+                            .anchor(0.0f, 1.0f)
+                            .position(new LatLng(openDataLaPalma.getmTaxiStopList().get(i).getmLat(),
+                                    openDataLaPalma.getmTaxiStopList().get(i).getmLng())));
+
+                    currentMarker.setTag(openDataLaPalma.getmTaxiStopList().get(i).getmId());
+                }
             }
-        }
 
-        googleMap.setOnMarkerClickListener(this);
+            googleMap.setOnMarkerClickListener(this);
+        } else {
+            // Show error message
+            Toast.makeText(this, getString(R.string.items_not_found), Toast.LENGTH_SHORT).show();
+        }
 
         // Set user location
         getUserLocation();

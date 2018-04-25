@@ -100,18 +100,25 @@ public class BusActivity extends AppCompatActivity implements OnMapReadyCallback
         // Load bus stops in map
         OpenDataLaPalma openDataLaPalma = OpenDataLaPalma.getInstance();
 
-        for (int i = 0; i < openDataLaPalma.getmBusStopList().size(); i++) {
-            currentMarker = googleMap.addMarker(new MarkerOptions()
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
-                    .title(openDataLaPalma.getmBusStopList().get(i).getmName())
-                    .anchor(0.0f, 1.0f)
-                    .position(new LatLng(openDataLaPalma.getmBusStopList().get(i).getmLat(),
-                            openDataLaPalma.getmBusStopList().get(i).getmLng())));
+        if(openDataLaPalma.getmBusStopList().size() > 0){
 
-            currentMarker.setTag(openDataLaPalma.getmBusStopList().get(i).getmId());
+            // Put markers in map
+            for (int i = 0; i < openDataLaPalma.getmBusStopList().size(); i++) {
+                currentMarker = googleMap.addMarker(new MarkerOptions()
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
+                        .title(openDataLaPalma.getmBusStopList().get(i).getmName())
+                        .anchor(0.0f, 1.0f)
+                        .position(new LatLng(openDataLaPalma.getmBusStopList().get(i).getmLat(),
+                                openDataLaPalma.getmBusStopList().get(i).getmLng())));
+
+                currentMarker.setTag(openDataLaPalma.getmBusStopList().get(i).getmId());
+            }
+
+            googleMap.setOnMarkerClickListener(this);
+        } else {
+            // Show error message
+            Toast.makeText(this, getString(R.string.items_not_found), Toast.LENGTH_SHORT).show();
         }
-
-        googleMap.setOnMarkerClickListener(this);
 
         // Set user location
         getUserLocation();

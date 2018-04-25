@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Smart LaPalma</string>
-    <string name="app_name_splash">Smart\nLaPalma</string>
 
     <!--Activity names-->
     <string name="main_activity_name">Inicio</string>
@@ -23,6 +22,10 @@
     <string name="contact">CONTACTO</string>
     <string name="about">ACERCA DE</string>
     <string name="exit">SALIR</string>
+
+    <!--Splash Activity-->
+    <string name="splash_network_error_face">Ups... :(</string>
+    <string name="splash_network_error">Sin Internet no puede funcionar esta aplicación... Consigue acceso y luego pulsa en recargar:</string>
 
     <!--Contact Activity-->
     <string name="internet_error">Ohh... No tienes conexión a Internet</string>

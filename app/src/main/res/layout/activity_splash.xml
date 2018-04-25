@@ -22,14 +22,50 @@
         </LinearLayout>
 
         <ProgressBar
-            android:id="@+id/pbHeaderProgress"
+            android:id="@+id/splash_Progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center"
             style="@style/Widget.AppCompat.Spinner"
+            android:visibility="visible"
             android:background="@null">
         </ProgressBar>
+
+        <LinearLayout
+            android:id="@+id/splash_network_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/md_white_1000"
+                android:textSize="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/splash_network_error_face"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/md_white_1000"
+                android:gravity="center"
+                android:textSize="16dp"
+                android:layout_marginBottom="15dp"
+                android:text="@string/splash_network_error"/>
+
+            <ImageButton
+                android:id="@+id/restart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/reload"/>
+        </LinearLayout>
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

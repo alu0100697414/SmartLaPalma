@@ -6,8 +6,15 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.android.volley.toolbox.Volley;
+import com.example.jose.smartlapalma.Controllers.Utils.CustomUtils;
 import com.example.jose.smartlapalma.Controllers.Utils.GetApplicationDataTask;
 import com.example.jose.smartlapalma.Controllers.Utils.Request;
 import com.example.jose.smartlapalma.Models.OpenDataLaPalma;
@@ -24,10 +31,17 @@ public class SplashActivity extends AppCompatActivity {
     private SharedPreferences mPrefs;
     private SharedPreferences.Editor mEditor;
 
+    private ProgressBar mProgressBar;
+    private ImageButton mRestartButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        // Progressbar and button
+        mProgressBar = findViewById(R.id.splash_Progress);
+        mRestartButton = findViewById(R.id.restart);
 
         // Shared preferences
         mPrefs = getSharedPreferences(
@@ -39,11 +53,50 @@ public class SplashActivity extends AppCompatActivity {
                 Locale.getDefault().getDisplayLanguage().toString());
         mEditor.commit();
 
-        // Call APIs thread
-        OpenDataLaPalma openDataLaPalma = OpenDataLaPalma.getInstance();
+        // Set restart button listener
+        setRestartButtonListener();
 
-        GetApplicationDataTask apiCalls = new GetApplicationDataTask(this, openDataLaPalma);
-        apiCalls.execute();
+        // Set error if network is noot available or send requests
+        checkNetworkStatus();
+    }
+
+    private void setRestartButtonListener(){
+
+        mRestartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // Hide error message possible network error
+                LinearLayout error = findViewById(R.id.splash_network_error);
+                error.setVisibility(View.GONE);
+
+                // Show spinner when data is loaded
+                mProgressBar.setVisibility(View.VISIBLE);
+
+                // Check again
+                checkNetworkStatus();
+            }
+        });
+    }
+
+    private void checkNetworkStatus(){
+
+        if(!CustomUtils.isNetworkAvailable(this)){
+
+            // Hide spinner when data is loaded
+            mProgressBar.setVisibility(View.GONE);
+
+            // Show error message possible network error
+            LinearLayout error = findViewById(R.id.splash_network_error);
+            error.setVisibility(View.VISIBLE);
+        } else {
+
+            // Call APIs thread
+            OpenDataLaPalma openDataLaPalma = OpenDataLaPalma.getInstance();
+
+            GetApplicationDataTask apiCalls = new GetApplicationDataTask(this, openDataLaPalma);
+            apiCalls.execute();
+        }
     }
 
     @Override

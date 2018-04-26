@@ -6,6 +6,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.jose.smartlapalma.Models.ArcheologicalSite;
 import com.example.jose.smartlapalma.Models.BusStop;
 import com.example.jose.smartlapalma.Models.Church;
 import com.example.jose.smartlapalma.Models.OpenDataLaPalma;
@@ -279,6 +280,64 @@ public class Request {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         GetApplicationDataTask.setChurchCallState(true);
+                    }
+                });
+
+        requestQueue.add(stringRequest);
+    }
+
+    // Get JSON with the archeological sites of the island
+    public static void getArcheologicalSites(){
+
+        StringRequest stringRequest = new StringRequest(com.android.volley.Request.Method.GET, ARCHEOLOGICAL_SITE_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        // Get instance of singleton class and clear previuos data
+                        OpenDataLaPalma openDataLaPalma = OpenDataLaPalma.getInstance();
+                        openDataLaPalma.getmArcheologicalSiteList().clear();
+
+                        try {
+                            // Convert string to JSON and get item json array
+                            JSONObject obj = new JSONObject(response);
+                            JSONArray jArray = obj.getJSONArray(ArcheologicalSite.mFeaturesKey);
+
+                            // Save items in singleton
+                            for (int i=0; i<jArray.length(); i++) {
+
+                                JSONObject currentObject = jArray.getJSONObject(i);
+
+                                String utm_latitude = currentObject.getJSONObject(ArcheologicalSite.mAttributesKey).getString(ArcheologicalSite.mUtmXKey);
+                                String utm_longitude = currentObject.getJSONObject(ArcheologicalSite.mAttributesKey).getString(ArcheologicalSite.mUtmYKey);
+
+                                if(!utm_latitude.isEmpty() && !utm_longitude.isEmpty()){
+
+                                    // Get latitude and longitude
+                                    UtmToLatLng latLng = new UtmToLatLng("28 R " + utm_latitude + " " + utm_longitude);
+
+                                    // Save the archeological site
+                                    openDataLaPalma.getmArcheologicalSiteList().add(new ArcheologicalSite(
+                                            currentObject.getJSONObject(ArcheologicalSite.mAttributesKey).getInt(ArcheologicalSite.mIdKey),
+                                            latLng.getmLatitude(),
+                                            latLng.getmLongitude(),
+                                            currentObject.getJSONObject(ArcheologicalSite.mAttributesKey).getString(ArcheologicalSite.mNameKey),
+                                            currentObject.getJSONObject(ArcheologicalSite.mAttributesKey).getString(ArcheologicalSite.mDirectionKey)
+                                    ));
+                                }
+                            }
+
+                        } catch (Throwable t) {
+                            Log.e(TAG, "Error while parsing the json.");
+                        }
+
+                        GetApplicationDataTask.setArcheologicalSiteCallState(true);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        GetApplicationDataTask.setArcheologicalSiteCallState(true);
                     }
                 });
 

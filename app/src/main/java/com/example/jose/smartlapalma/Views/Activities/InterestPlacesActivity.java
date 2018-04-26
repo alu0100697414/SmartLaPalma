@@ -138,6 +138,26 @@ public class InterestPlacesActivity extends AppCompatActivity implements OnMapRe
             Toast.makeText(this, getString(R.string.items_not_found), Toast.LENGTH_SHORT).show();
         }
 
+        if(openDataLaPalma.getmArcheologicalSiteList().size() > 0){
+
+            // Put markers in map
+            for (int i = 0; i < openDataLaPalma.getmArcheologicalSiteList().size(); i++) {
+                currentMarker = googleMap.addMarker(new MarkerOptions()
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.archeology))
+                        .title(getString(R.string.archeological_site) + " " + openDataLaPalma.getmArcheologicalSiteList().get(i).getmName())
+                        .anchor(0.0f, 1.0f)
+                        .position(new LatLng(openDataLaPalma.getmArcheologicalSiteList().get(i).getmLat(),
+                                openDataLaPalma.getmArcheologicalSiteList().get(i).getmLng())));
+
+                currentMarker.setTag(openDataLaPalma.getmArcheologicalSiteList().get(i).getmId() + ARCHEOLOGICAL_ID);
+            }
+
+            googleMap.setOnMarkerClickListener(this);
+        } else {
+            // Show error message
+            Toast.makeText(this, getString(R.string.items_not_found), Toast.LENGTH_SHORT).show();
+        }
+
         // Set user location
         getUserLocation();
     }
@@ -185,7 +205,29 @@ public class InterestPlacesActivity extends AppCompatActivity implements OnMapRe
                 }
             }
 
-            // Show toast with the lines
+            // Show toast with the direction
+            if(!direction.isEmpty() && !direction.equals(" ")){
+                Toast.makeText(this,
+                        getString(R.string.direction) + " " + direction,
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this,
+                        getString(R.string.direction_not_available),
+                        Toast.LENGTH_SHORT).show();
+            }
+        } else if(tag >= ARCHEOLOGICAL_ID && tag < LIBRARY_ID) {
+
+            String direction = "";
+            for(int i=0; i<openDataLaPalma.getmArcheologicalSiteList().size(); i++){
+
+                int customTag = tag - ARCHEOLOGICAL_ID;
+
+                if(openDataLaPalma.getmArcheologicalSiteList().get(i).getmId() == customTag){
+                    direction = String.valueOf(openDataLaPalma.getmArcheologicalSiteList().get(i).getmDirection());
+                }
+            }
+
+            // Show toast with the direction
             if(!direction.isEmpty() && !direction.equals(" ")){
                 Toast.makeText(this,
                         getString(R.string.direction) + " " + direction,

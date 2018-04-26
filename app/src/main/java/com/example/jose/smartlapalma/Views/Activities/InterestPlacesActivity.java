@@ -118,6 +118,26 @@ public class InterestPlacesActivity extends AppCompatActivity implements OnMapRe
             Toast.makeText(this, getString(R.string.items_not_found), Toast.LENGTH_SHORT).show();
         }
 
+        if(openDataLaPalma.getmChurchList().size() > 0){
+
+            // Put markers in map
+            for (int i = 0; i < openDataLaPalma.getmChurchList().size(); i++) {
+                currentMarker = googleMap.addMarker(new MarkerOptions()
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.church))
+                        .title(getString(R.string.church) + " " + openDataLaPalma.getmChurchList().get(i).getmName())
+                        .anchor(0.0f, 1.0f)
+                        .position(new LatLng(openDataLaPalma.getmChurchList().get(i).getmLat(),
+                                openDataLaPalma.getmChurchList().get(i).getmLng())));
+
+                currentMarker.setTag(openDataLaPalma.getmChurchList().get(i).getmId() + CHURCH_ID);
+            }
+
+            googleMap.setOnMarkerClickListener(this);
+        } else {
+            // Show error message
+            Toast.makeText(this, getString(R.string.items_not_found), Toast.LENGTH_SHORT).show();
+        }
+
         // Set user location
         getUserLocation();
     }
@@ -151,6 +171,28 @@ public class InterestPlacesActivity extends AppCompatActivity implements OnMapRe
             } else {
                 Toast.makeText(this,
                         getString(R.string.phone_not_available),
+                        Toast.LENGTH_SHORT).show();
+            }
+        } else if(tag >= CHURCH_ID && tag < ARCHEOLOGICAL_ID) {
+
+            String direction = "";
+            for(int i=0; i<openDataLaPalma.getmChurchList().size(); i++){
+
+                int customTag = tag - CHURCH_ID;
+
+                if(openDataLaPalma.getmChurchList().get(i).getmId() == customTag){
+                    direction = String.valueOf(openDataLaPalma.getmChurchList().get(i).getmDirection());
+                }
+            }
+
+            // Show toast with the lines
+            if(!direction.isEmpty() && !direction.equals(" ")){
+                Toast.makeText(this,
+                        getString(R.string.direction) + " " + direction,
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this,
+                        getString(R.string.direction_not_available),
                         Toast.LENGTH_SHORT).show();
             }
         }

@@ -7,6 +7,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.jose.smartlapalma.Models.BusStop;
+import com.example.jose.smartlapalma.Models.Church;
 import com.example.jose.smartlapalma.Models.OpenDataLaPalma;
 import com.example.jose.smartlapalma.Models.TaxiStop;
 import com.example.jose.smartlapalma.Models.TouristAccommodation;
@@ -209,7 +210,6 @@ public class Request {
                                 }
                             }
 
-                            BusActivity.loadData();
                         } catch (Throwable t) {
                             Log.e(TAG, "Error while parsing the json.");
                         }
@@ -221,6 +221,64 @@ public class Request {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         GetApplicationDataTask.setTouristAccommodationCallState(true);
+                    }
+                });
+
+        requestQueue.add(stringRequest);
+    }
+
+    // Get JSON with the churchs of the island
+    public static void getChurchs(){
+
+        StringRequest stringRequest = new StringRequest(com.android.volley.Request.Method.GET, CHURCH_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        // Get instance of singleton class and clear previuos data
+                        OpenDataLaPalma openDataLaPalma = OpenDataLaPalma.getInstance();
+                        openDataLaPalma.getmChurchList().clear();
+
+                        try {
+                            // Convert string to JSON and get item json array
+                            JSONObject obj = new JSONObject(response);
+                            JSONArray jArray = obj.getJSONArray(Church.mFeaturesKey);
+
+                            // Save items in singleton
+                            for (int i=0; i<jArray.length(); i++) {
+
+                                JSONObject currentObject = jArray.getJSONObject(i);
+
+                                String utm_latitude = currentObject.getJSONObject(Church.mAttributesKey).getString(Church.mUtmXKey);
+                                String utm_longitude = currentObject.getJSONObject(Church.mAttributesKey).getString(Church.mUtmYKey);
+
+                                if(!utm_latitude.isEmpty() && !utm_longitude.isEmpty()){
+
+                                    // Get latitude and longitude
+                                    UtmToLatLng latLng = new UtmToLatLng("28 R " + utm_latitude + " " + utm_longitude);
+
+                                    // Save the church
+                                    openDataLaPalma.getmChurchList().add(new Church(
+                                            currentObject.getJSONObject(Church.mAttributesKey).getInt(Church.mIdKey),
+                                            latLng.getmLatitude(),
+                                            latLng.getmLongitude(),
+                                            currentObject.getJSONObject(Church.mAttributesKey).getString(Church.mNameKey),
+                                            currentObject.getJSONObject(Church.mAttributesKey).getString(Church.mDirectionKey)
+                                    ));
+                                }
+                            }
+
+                        } catch (Throwable t) {
+                            Log.e(TAG, "Error while parsing the json.");
+                        }
+
+                        GetApplicationDataTask.setChurchCallState(true);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        GetApplicationDataTask.setChurchCallState(true);
                     }
                 });
 

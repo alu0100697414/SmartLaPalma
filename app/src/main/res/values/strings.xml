@@ -50,7 +50,9 @@
 
     <!--Interest places Activity-->
     <string name="accommodation">Alojamiento:</string>
-
+    <string name="church">Iglesia:</string>
+    <string name="direction">Dirección:</string>
+    <string name="direction_not_available">Dirección no disponible</string>
 
     <!--Errors-->
     <string name="gps_conection_error">Se ha producido un error al obtener la posición GPS</string>

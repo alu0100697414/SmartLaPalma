@@ -9,6 +9,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.jose.smartlapalma.Models.ArcheologicalSite;
 import com.example.jose.smartlapalma.Models.BusStop;
 import com.example.jose.smartlapalma.Models.Church;
+import com.example.jose.smartlapalma.Models.Library;
 import com.example.jose.smartlapalma.Models.OpenDataLaPalma;
 import com.example.jose.smartlapalma.Models.TaxiStop;
 import com.example.jose.smartlapalma.Models.TouristAccommodation;
@@ -338,6 +339,64 @@ public class Request {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         GetApplicationDataTask.setArcheologicalSiteCallState(true);
+                    }
+                });
+
+        requestQueue.add(stringRequest);
+    }
+
+    // Get JSON with the libraries of the island
+    public static void getLibraries(){
+
+        StringRequest stringRequest = new StringRequest(com.android.volley.Request.Method.GET, LIBRARY_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        // Get instance of singleton class and clear previuos data
+                        OpenDataLaPalma openDataLaPalma = OpenDataLaPalma.getInstance();
+                        openDataLaPalma.getmLibraryList().clear();
+
+                        try {
+                            // Convert string to JSON and get item json array
+                            JSONObject obj = new JSONObject(response);
+                            JSONArray jArray = obj.getJSONArray(Library.mFeaturesKey);
+
+                            // Save items in singleton
+                            for (int i=0; i<jArray.length(); i++) {
+
+                                JSONObject currentObject = jArray.getJSONObject(i);
+
+                                String utm_latitude = currentObject.getJSONObject(Library.mAttributesKey).getString(Library.mUtmXKey);
+                                String utm_longitude = currentObject.getJSONObject(Library.mAttributesKey).getString(Library.mUtmYKey);
+
+                                if(!utm_latitude.isEmpty() && !utm_longitude.isEmpty()){
+
+                                    // Get latitude and longitude
+                                    UtmToLatLng latLng = new UtmToLatLng("28 R " + utm_latitude + " " + utm_longitude);
+
+                                    // Save the library site
+                                    openDataLaPalma.getmLibraryList().add(new Library(
+                                            currentObject.getJSONObject(Library.mAttributesKey).getInt(Library.mIdKey),
+                                            latLng.getmLatitude(),
+                                            latLng.getmLongitude(),
+                                            currentObject.getJSONObject(Library.mAttributesKey).getString(Library.mNameKey),
+                                            currentObject.getJSONObject(Library.mAttributesKey).getString(Library.mDirectionKey)
+                                    ));
+                                }
+                            }
+
+                        } catch (Throwable t) {
+                            Log.e(TAG, "Error while parsing the json.");
+                        }
+
+                        GetApplicationDataTask.setLibraryCallState(true);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        GetApplicationDataTask.setLibraryCallState(true);
                     }
                 });
 

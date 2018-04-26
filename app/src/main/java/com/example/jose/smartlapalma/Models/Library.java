@@ -18,6 +18,15 @@ public class Library {
     private String mName;
     private String mDirection;
 
+    public Library(int id, double lat, double lng, String name, String direction){
+
+        mId = id;
+        mLat = lat;
+        mLng = lng;
+        mName = name;
+        mDirection = direction;
+    }
+
     public int getmId() {
         return mId;
     }

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -13,6 +12,7 @@ import com.example.jose.smartlapalma.Models.UserType;
 import com.example.jose.smartlapalma.R;
 import com.example.jose.smartlapalma.Views.Activities.AboutActivity;
 import com.example.jose.smartlapalma.Views.Activities.ContactActivity;
+import com.example.jose.smartlapalma.Views.Activities.InterestPlacesActivity;
 import com.example.jose.smartlapalma.Views.Activities.MainActivity;
 import com.example.jose.smartlapalma.Views.Activities.NewsActivity;
 import com.example.jose.smartlapalma.Views.Activities.TransportsActivity;
@@ -143,6 +143,10 @@ public class CustomMaterialDrawer {
                                 openTransportsActivity();
                                 break;
 
+                            case 5: // Open interest places activity
+                                openInterestPlacesActivity();
+                                break;
+
                             case 6: // Open contact activity
                                 openContactActivity();
                                 break;
@@ -254,6 +258,10 @@ public class CustomMaterialDrawer {
                                 openTransportsActivity();
                                 break;
 
+                            case 5: // Open interest places activity
+                                openInterestPlacesActivity();
+                                break;
+
                             case 6: // Open contact activity
                                 openContactActivity();
                                 break;
@@ -300,6 +308,17 @@ public class CustomMaterialDrawer {
     private void openTransportsActivity(){
 
         Intent intent = new Intent(mActivity, TransportsActivity.class);
+
+        if(!mActivity.getClass().getSimpleName().equals("MainActivity")){
+            mActivity.finish();
+        }
+
+        mActivity.startActivity(intent);
+    }
+
+    private void openInterestPlacesActivity(){
+
+        Intent intent = new Intent(mActivity, InterestPlacesActivity.class);
 
         if(!mActivity.getClass().getSimpleName().equals("MainActivity")){
             mActivity.finish();

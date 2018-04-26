@@ -22,8 +22,8 @@
         <activity
             android:name=".Views.Activities.SplashActivity"
             android:configChanges="orientation"
-            android:theme="@style/Theme.Splash"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Splash">
             <intent-filter android:label="@string/app_name">
                 <action android:name="android.intent.action.MAIN" />
 
@@ -64,10 +64,16 @@
             android:configChanges="orientation"
             android:label="@string/bus_activity_name"
             android:screenOrientation="portrait" />
-        <activity android:name=".Views.Activities.TaxiActivity"
+        <activity
+            android:name=".Views.Activities.TaxiActivity"
             android:configChanges="orientation"
             android:label="@string/taxi_activity_name"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".Views.Activities.InterestPlacesActivity"
+            android:configChanges="orientation"
+            android:label="@string/interest_activity_name"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

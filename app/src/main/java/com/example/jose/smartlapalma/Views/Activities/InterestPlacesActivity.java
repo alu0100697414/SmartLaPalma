@@ -11,10 +11,12 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.jose.smartlapalma.Controllers.Utils.CustomMaterialDrawer;
 import com.example.jose.smartlapalma.Controllers.Utils.UserLocation;
+import com.example.jose.smartlapalma.Models.OpenDataLaPalma;
 import com.example.jose.smartlapalma.Models.SharedPreferencesKeys;
 import com.example.jose.smartlapalma.Models.UserType;
 import com.example.jose.smartlapalma.R;
@@ -23,8 +25,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class InterestPlacesActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleMap.OnMarkerClickListener {
@@ -33,6 +37,12 @@ public class InterestPlacesActivity extends AppCompatActivity implements OnMapRe
 
     private final int REQUEST_PERMISSION_LOCATION = 101;
     private final int RESULT_GPS_CODE = 102;
+
+    private final int TOURIST_ACCOMMODATION_ID = 1000;
+    private final int CHURCH_ID = 2000;
+    private final int ARCHEOLOGICAL_ID = 3000;
+    private final int LIBRARY_ID = 4000;
+    private final int MONUMENT_ID = 5000;
 
     private GoogleMap mMap;
     private SharedPreferences mPrefs;
@@ -70,11 +80,6 @@ public class InterestPlacesActivity extends AppCompatActivity implements OnMapRe
     }
 
     @Override
-    public boolean onMarkerClick(Marker marker) {
-        return false;
-    }
-
-    @Override
     public void onMapReady(GoogleMap googleMap) {
 
         // Configuration
@@ -90,8 +95,67 @@ public class InterestPlacesActivity extends AppCompatActivity implements OnMapRe
         uiSettings.setMyLocationButtonEnabled(true);
         uiSettings.setZoomControlsEnabled(true);
 
+        // Load bus stops in map
+        OpenDataLaPalma openDataLaPalma = OpenDataLaPalma.getInstance();
+
+        if(openDataLaPalma.getmTouristAccommodationList().size() > 0){
+
+            // Put markers in map
+            for (int i = 0; i < openDataLaPalma.getmTouristAccommodationList().size(); i++) {
+                currentMarker = googleMap.addMarker(new MarkerOptions()
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.hotel))
+                        .title(getString(R.string.accommodation) + " " + openDataLaPalma.getmTouristAccommodationList().get(i).getmName())
+                        .anchor(0.0f, 1.0f)
+                        .position(new LatLng(openDataLaPalma.getmTouristAccommodationList().get(i).getmLat(),
+                                openDataLaPalma.getmTouristAccommodationList().get(i).getmLng())));
+
+                currentMarker.setTag(openDataLaPalma.getmTouristAccommodationList().get(i).getmId() + TOURIST_ACCOMMODATION_ID);
+            }
+
+            googleMap.setOnMarkerClickListener(this);
+        } else {
+            // Show error message
+            Toast.makeText(this, getString(R.string.items_not_found), Toast.LENGTH_SHORT).show();
+        }
+
         // Set user location
         getUserLocation();
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+
+        // Retrieve the data from the marker.
+        Integer tag = (Integer) marker.getTag();
+
+        // Get lines from the maker
+        OpenDataLaPalma openDataLaPalma = OpenDataLaPalma.getInstance();
+
+        if(tag >= TOURIST_ACCOMMODATION_ID && tag < CHURCH_ID) {
+
+            String phone = "";
+            for(int i=0; i<openDataLaPalma.getmTouristAccommodationList().size(); i++){
+
+                int customTag = tag - TOURIST_ACCOMMODATION_ID;
+
+                if(openDataLaPalma.getmTouristAccommodationList().get(i).getmId() == customTag){
+                    phone = String.valueOf(openDataLaPalma.getmTouristAccommodationList().get(i).getmPhone());
+                }
+            }
+
+            // Show toast with the lines
+            if(!phone.isEmpty() && !phone.equals(" ")){
+                Toast.makeText(this,
+                        getString(R.string.taxi_toast) + " " + phone,
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this,
+                        getString(R.string.phone_not_available),
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        return false;
     }
 
     private void getUserLocation(){

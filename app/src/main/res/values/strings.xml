@@ -48,6 +48,10 @@
     <string name="taxi_toast">Teléfono:</string>
     <string name="phone_not_available">Teléfono no disponible</string>
 
+    <!--Interest places Activity-->
+    <string name="accommodation">Alojamiento:</string>
+
+
     <!--Errors-->
     <string name="gps_conection_error">Se ha producido un error al obtener la posición GPS</string>
     <string name="gps_not_available">No se mostrará su ubicación en el mapa</string>

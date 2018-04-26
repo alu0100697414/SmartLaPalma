@@ -1,6 +1,12 @@
 package com.example.jose.smartlapalma.Models;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
 public class TouristAccommodation {
+
+    public static final List<Integer> notAccommodation = Arrays.asList(171, 487);
 
     public static final String mFeaturesKey = "features";
 
@@ -17,6 +23,15 @@ public class TouristAccommodation {
     private double mLng;
     private String mName;
     private String mPhone;
+
+    public TouristAccommodation(int id, double lat, double lng, String name, String phone){
+
+        mId = id;
+        mLat = lat;
+        mLng = lng;
+        mName = name;
+        mPhone = phone;
+    }
 
     public int getmId() {
         return mId;

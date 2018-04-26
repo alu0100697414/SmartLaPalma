@@ -25,6 +25,7 @@ public class GetApplicationDataTask extends AsyncTask<Void, Integer, Boolean> {
 
     private volatile static boolean busStopCallState;
     private volatile static boolean taxiStopCallState;
+    private volatile static boolean touristAccommodationCallState;
 
     public GetApplicationDataTask(Context context, OpenDataLaPalma openDataLaPalma){
 
@@ -33,6 +34,7 @@ public class GetApplicationDataTask extends AsyncTask<Void, Integer, Boolean> {
 
         busStopCallState = false;
         taxiStopCallState = false;
+        touristAccommodationCallState = false;
     }
 
     @Override
@@ -42,9 +44,10 @@ public class GetApplicationDataTask extends AsyncTask<Void, Integer, Boolean> {
 
         Request.getBusStops();
         Request.getTaxiStops();
+        Request.getTouristAccommodation();
 
         // Wait for resuts of calls
-        while(!busStopCallState && !taxiStopCallState){
+        while(!busStopCallState && !taxiStopCallState && !touristAccommodationCallState){
             try {  Thread.sleep(250); }
             catch (InterruptedException e) { e.printStackTrace(); }
         }
@@ -102,5 +105,13 @@ public class GetApplicationDataTask extends AsyncTask<Void, Integer, Boolean> {
 
     public static boolean isTaxiStopCallState() {
         return taxiStopCallState;
+    }
+
+    public static boolean isTouristAccommodationCallState() {
+        return touristAccommodationCallState;
+    }
+
+    public static void setTouristAccommodationCallState(boolean touristAccommodationCallState) {
+        GetApplicationDataTask.touristAccommodationCallState = touristAccommodationCallState;
     }
 }

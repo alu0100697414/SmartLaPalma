@@ -54,6 +54,7 @@
     <string name="direction">Dirección:</string>
     <string name="archeological_site">Lugar arqueológico:</string>
     <string name="library">Biblioteca:</string>
+    <string name="monument">Monumento:</string>
     <string name="direction_not_available">Dirección no disponible</string>
 
     <!--Errors-->

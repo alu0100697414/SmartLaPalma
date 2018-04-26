@@ -29,6 +29,7 @@ public class GetApplicationDataTask extends AsyncTask<Void, Integer, Boolean> {
     private volatile static boolean churchCallState;
     private volatile static boolean archeologicalSiteCallState;
     private volatile static boolean libraryCallState;
+    private volatile static boolean monumentCallState;
 
     public GetApplicationDataTask(Context context, OpenDataLaPalma openDataLaPalma){
 
@@ -41,6 +42,7 @@ public class GetApplicationDataTask extends AsyncTask<Void, Integer, Boolean> {
         churchCallState = true;
         archeologicalSiteCallState = true;
         libraryCallState = true;
+        monumentCallState = true;
     }
 
     @Override
@@ -54,10 +56,12 @@ public class GetApplicationDataTask extends AsyncTask<Void, Integer, Boolean> {
         Request.getChurchs();
         Request.getArcheologicalSites();
         Request.getLibraries();
+        Request.getMonuments();
 
         // Wait for resuts of calls
         while(!busStopCallState && !taxiStopCallState && !touristAccommodationCallState
-                && !churchCallState && !archeologicalSiteCallState && !libraryCallState){
+                && !churchCallState && !archeologicalSiteCallState && !libraryCallState
+                && !monumentCallState){
             try {  Thread.sleep(250); }
             catch (InterruptedException e) { e.printStackTrace(); }
         }
@@ -147,5 +151,13 @@ public class GetApplicationDataTask extends AsyncTask<Void, Integer, Boolean> {
 
     public static void setLibraryCallState(boolean libraryCallState) {
         GetApplicationDataTask.libraryCallState = libraryCallState;
+    }
+
+    public static boolean isMonumentCallState() {
+        return monumentCallState;
+    }
+
+    public static void setMonumentCallState(boolean monumentCallState) {
+        GetApplicationDataTask.monumentCallState = monumentCallState;
     }
 }

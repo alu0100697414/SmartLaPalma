@@ -178,6 +178,26 @@ public class InterestPlacesActivity extends AppCompatActivity implements OnMapRe
             Toast.makeText(this, getString(R.string.items_not_found), Toast.LENGTH_SHORT).show();
         }
 
+        if(openDataLaPalma.getmMonumentList().size() > 0){
+
+            // Put markers in map
+            for (int i = 0; i < openDataLaPalma.getmMonumentList().size(); i++) {
+                currentMarker = googleMap.addMarker(new MarkerOptions()
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.museum))
+                        .title(getString(R.string.monument) + " " + openDataLaPalma.getmMonumentList().get(i).getmName())
+                        .anchor(0.0f, 1.0f)
+                        .position(new LatLng(openDataLaPalma.getmMonumentList().get(i).getmLat(),
+                                openDataLaPalma.getmMonumentList().get(i).getmLng())));
+
+                currentMarker.setTag(openDataLaPalma.getmMonumentList().get(i).getmId() + MONUMENT_ID);
+            }
+
+            googleMap.setOnMarkerClickListener(this);
+        } else {
+            // Show error message
+            Toast.makeText(this, getString(R.string.items_not_found), Toast.LENGTH_SHORT).show();
+        }
+
         // Set user location
         getUserLocation();
     }
@@ -266,6 +286,28 @@ public class InterestPlacesActivity extends AppCompatActivity implements OnMapRe
 
                 if(openDataLaPalma.getmLibraryList().get(i).getmId() == customTag){
                     direction = String.valueOf(openDataLaPalma.getmLibraryList().get(i).getmDirection());
+                }
+            }
+
+            // Show toast with the direction
+            if(!direction.isEmpty() && !direction.equals(" ")){
+                Toast.makeText(this,
+                        getString(R.string.direction) + " " + direction,
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this,
+                        getString(R.string.direction_not_available),
+                        Toast.LENGTH_SHORT).show();
+            }
+        } else if(tag >= MONUMENT_ID) {
+
+            String direction = "";
+            for(int i=0; i<openDataLaPalma.getmMonumentList().size(); i++){
+
+                int customTag = tag - MONUMENT_ID;
+
+                if(openDataLaPalma.getmMonumentList().get(i).getmId() == customTag){
+                    direction = String.valueOf(openDataLaPalma.getmMonumentList().get(i).getmDirection());
                 }
             }
 

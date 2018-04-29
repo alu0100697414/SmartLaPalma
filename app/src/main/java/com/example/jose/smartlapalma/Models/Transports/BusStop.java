@@ -1,30 +1,31 @@
-package com.example.jose.smartlapalma.Models;
+package com.example.jose.smartlapalma.Models.Transports;
 
-public class Monument {
+public class BusStop {
 
     public static final String mFeaturesKey = "features";
 
     public static final String mAttributesKey = "attributes";
 
-    public static final String mIdKey = "OBJECTID";
-    public static final String mNameKey = "Nombre";
-    public static final String mDirectionKey = "Dirección";
-    public static final String mUtmXKey = "UTM_X";
-    public static final String mUtmYKey = "UTM_Y";
+    public static final String mIdKey = "ID";
+    public static final String mLatKey = "DMSLat";
+    public static final String mLngKey = "DMSLon";
+    public static final String mNameKey = "PARADA";
+    public static final String mLineKey = "LINEAS";
 
     private int mId;
     private double mLat;
     private double mLng;
     private String mName;
-    private String mDirection;
+    private String mLine;
 
-    public Monument(int id, double lat, double lng, String name, String direction){
+    // Constructor
+    public BusStop(int id, double lat, double lng, String name, String line){
 
         mId = id;
         mLat = lat;
         mLng = lng;
         mName = name;
-        mDirection = direction;
+        mLine = line;
     }
 
     public int getmId() {
@@ -43,8 +44,8 @@ public class Monument {
         return mName;
     }
 
-    public String getmDirection() {
-        return mDirection;
+    public String getmLine() {
+        return mLine;
     }
 
     public void setmId(int mId) {
@@ -63,7 +64,7 @@ public class Monument {
         this.mName = mName;
     }
 
-    public void setmDirection(String mDirection) {
-        this.mDirection = mDirection;
+    public void setmLine(String mLine) {
+        this.mLine = mLine;
     }
 }

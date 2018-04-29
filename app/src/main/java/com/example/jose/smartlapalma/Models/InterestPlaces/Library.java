@@ -1,4 +1,4 @@
-package com.example.jose.smartlapalma.Models;
+package com.example.jose.smartlapalma.Models.InterestPlaces;
 
 public class Library {
 

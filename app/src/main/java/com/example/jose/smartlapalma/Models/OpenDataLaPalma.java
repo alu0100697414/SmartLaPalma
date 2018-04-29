@@ -1,5 +1,13 @@
 package com.example.jose.smartlapalma.Models;
 
+import com.example.jose.smartlapalma.Models.InterestPlaces.ArcheologicalSite;
+import com.example.jose.smartlapalma.Models.InterestPlaces.Church;
+import com.example.jose.smartlapalma.Models.InterestPlaces.Library;
+import com.example.jose.smartlapalma.Models.InterestPlaces.Monument;
+import com.example.jose.smartlapalma.Models.InterestPlaces.TouristAccommodation;
+import com.example.jose.smartlapalma.Models.Transports.BusStop;
+import com.example.jose.smartlapalma.Models.Transports.TaxiStop;
+
 import java.util.ArrayList;
 import java.util.List;
 

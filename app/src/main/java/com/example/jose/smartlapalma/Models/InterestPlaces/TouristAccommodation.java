@@ -1,31 +1,36 @@
-package com.example.jose.smartlapalma.Models;
+package com.example.jose.smartlapalma.Models.InterestPlaces;
 
-public class BusStop {
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
+public class TouristAccommodation {
+
+    public static final List<Integer> notAccommodation = Arrays.asList(171, 487);
 
     public static final String mFeaturesKey = "features";
 
     public static final String mAttributesKey = "attributes";
 
     public static final String mIdKey = "ID";
-    public static final String mLatKey = "DMSLat";
-    public static final String mLngKey = "DMSLon";
-    public static final String mNameKey = "PARADA";
-    public static final String mLineKey = "LINEAS";
+    public static final String mNameKey = "NOMBRE";
+    public static final String mPhoneKey = "TELEFONO";
+    public static final String mUtmXKey = "UTM_X";
+    public static final String mUtmYKey = "UTM_Y";
 
     private int mId;
     private double mLat;
     private double mLng;
     private String mName;
-    private String mLine;
+    private String mPhone;
 
-    // Constructor
-    public BusStop(int id, double lat, double lng, String name, String line){
+    public TouristAccommodation(int id, double lat, double lng, String name, String phone){
 
         mId = id;
         mLat = lat;
         mLng = lng;
         mName = name;
-        mLine = line;
+        mPhone = phone;
     }
 
     public int getmId() {
@@ -44,8 +49,8 @@ public class BusStop {
         return mName;
     }
 
-    public String getmLine() {
-        return mLine;
+    public String getmPhone() {
+        return mPhone;
     }
 
     public void setmId(int mId) {
@@ -64,7 +69,7 @@ public class BusStop {
         this.mName = mName;
     }
 
-    public void setmLine(String mLine) {
-        this.mLine = mLine;
+    public void setmPhone(String mPhone) {
+        this.mPhone = mPhone;
     }
 }

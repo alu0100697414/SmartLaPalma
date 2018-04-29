@@ -6,21 +6,19 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.example.jose.smartlapalma.Models.ArcheologicalSite;
-import com.example.jose.smartlapalma.Models.BusStop;
-import com.example.jose.smartlapalma.Models.Church;
-import com.example.jose.smartlapalma.Models.Library;
-import com.example.jose.smartlapalma.Models.Monument;
+import com.example.jose.smartlapalma.Models.InterestPlaces.ArcheologicalSite;
+import com.example.jose.smartlapalma.Models.Transports.BusStop;
+import com.example.jose.smartlapalma.Models.InterestPlaces.Church;
+import com.example.jose.smartlapalma.Models.InterestPlaces.Library;
+import com.example.jose.smartlapalma.Models.InterestPlaces.Monument;
 import com.example.jose.smartlapalma.Models.OpenDataLaPalma;
-import com.example.jose.smartlapalma.Models.TaxiStop;
-import com.example.jose.smartlapalma.Models.TouristAccommodation;
+import com.example.jose.smartlapalma.Models.Transports.TaxiStop;
+import com.example.jose.smartlapalma.Models.InterestPlaces.TouristAccommodation;
 import com.example.jose.smartlapalma.Views.Activities.BusActivity;
 import com.example.jose.smartlapalma.Views.Activities.TaxiActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.Arrays;
 
 public class Request {
 

@@ -1,8 +1,6 @@
 package com.example.jose.smartlapalma.Views.Activities;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.jose.smartlapalma.Models.New;
+import com.example.jose.smartlapalma.Models.News.New;
 import com.example.jose.smartlapalma.R;
 import com.squareup.picasso.Picasso;
 

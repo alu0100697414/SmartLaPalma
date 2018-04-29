@@ -1,14 +1,14 @@
-package com.example.jose.smartlapalma.Models;
+package com.example.jose.smartlapalma.Models.InterestPlaces;
 
-public class Church {
+public class Monument {
 
     public static final String mFeaturesKey = "features";
 
     public static final String mAttributesKey = "attributes";
 
     public static final String mIdKey = "OBJECTID";
-    public static final String mNameKey = "NOMBRE";
-    public static final String mDirectionKey = "DIRECCICN";
+    public static final String mNameKey = "Nombre";
+    public static final String mDirectionKey = "Dirección";
     public static final String mUtmXKey = "UTM_X";
     public static final String mUtmYKey = "UTM_Y";
 
@@ -18,7 +18,7 @@ public class Church {
     private String mName;
     private String mDirection;
 
-    public Church(int id, double lat, double lng, String name, String direction){
+    public Monument(int id, double lat, double lng, String name, String direction){
 
         mId = id;
         mLat = lat;

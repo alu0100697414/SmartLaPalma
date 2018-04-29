@@ -1,4 +1,4 @@
-package com.example.jose.smartlapalma.Models;
+package com.example.jose.smartlapalma.Models.News;
 
 import android.graphics.Bitmap;
 

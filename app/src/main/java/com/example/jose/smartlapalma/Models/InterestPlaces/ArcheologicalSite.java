@@ -1,20 +1,14 @@
-package com.example.jose.smartlapalma.Models;
+package com.example.jose.smartlapalma.Models.InterestPlaces;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-
-public class TouristAccommodation {
-
-    public static final List<Integer> notAccommodation = Arrays.asList(171, 487);
+public class ArcheologicalSite {
 
     public static final String mFeaturesKey = "features";
 
     public static final String mAttributesKey = "attributes";
 
-    public static final String mIdKey = "ID";
-    public static final String mNameKey = "NOMBRE";
-    public static final String mPhoneKey = "TELEFONO";
+    public static final String mIdKey = "OBJECTID";
+    public static final String mNameKey = "Nombre";
+    public static final String mDirectionKey = "Dirección";
     public static final String mUtmXKey = "UTM_X";
     public static final String mUtmYKey = "UTM_Y";
 
@@ -22,15 +16,15 @@ public class TouristAccommodation {
     private double mLat;
     private double mLng;
     private String mName;
-    private String mPhone;
+    private String mDirection;
 
-    public TouristAccommodation(int id, double lat, double lng, String name, String phone){
+    public ArcheologicalSite(int id, double lat, double lng, String name, String direction){
 
         mId = id;
         mLat = lat;
         mLng = lng;
         mName = name;
-        mPhone = phone;
+        mDirection = direction;
     }
 
     public int getmId() {
@@ -49,8 +43,8 @@ public class TouristAccommodation {
         return mName;
     }
 
-    public String getmPhone() {
-        return mPhone;
+    public String getmDirection() {
+        return mDirection;
     }
 
     public void setmId(int mId) {
@@ -69,7 +63,7 @@ public class TouristAccommodation {
         this.mName = mName;
     }
 
-    public void setmPhone(String mPhone) {
-        this.mPhone = mPhone;
+    public void setmDirection(String mDirection) {
+        this.mDirection = mDirection;
     }
 }

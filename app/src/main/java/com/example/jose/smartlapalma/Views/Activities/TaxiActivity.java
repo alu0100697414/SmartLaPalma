@@ -6,8 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
@@ -20,7 +18,7 @@ import com.example.jose.smartlapalma.Controllers.Utils.CustomMaterialDrawer;
 import com.example.jose.smartlapalma.Controllers.Utils.UserLocation;
 import com.example.jose.smartlapalma.Models.OpenDataLaPalma;
 import com.example.jose.smartlapalma.Models.SharedPreferencesKeys;
-import com.example.jose.smartlapalma.Models.TaxiStop;
+import com.example.jose.smartlapalma.Models.Transports.TaxiStop;
 import com.example.jose.smartlapalma.Models.UserType;
 import com.example.jose.smartlapalma.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -32,10 +30,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
 
 public class TaxiActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleMap.OnMarkerClickListener {

@@ -7,6 +7,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.jose.smartlapalma.Models.InterestPlaces.ArcheologicalSite;
+import com.example.jose.smartlapalma.Models.Meteorology.DayWeather;
+import com.example.jose.smartlapalma.Models.Meteorology.Precipitation;
+import com.example.jose.smartlapalma.Models.Meteorology.Weather;
 import com.example.jose.smartlapalma.Models.Transports.BusStop;
 import com.example.jose.smartlapalma.Models.InterestPlaces.Church;
 import com.example.jose.smartlapalma.Models.InterestPlaces.Library;
@@ -18,6 +21,7 @@ import com.example.jose.smartlapalma.Views.Activities.BusActivity;
 import com.example.jose.smartlapalma.Views.Activities.TaxiActivity;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Request {
@@ -54,6 +58,13 @@ public class Request {
     private static final String MONUMENT_URL = "https://services.arcgis.com/hkQNLKNeDVYBjvFE/" +
             "arcgis/rest/services/BIC/FeatureServer/1/query?where=1%3D1&outFields=OBJECTID," +
             "Nombre,Dirección,UTM_X,UTM_Y&returnGeometry=false&outSR=4326&f=json";
+
+    private static final String WEATHER_API = "https://opendata.aemet.es/opendata/api/prediccion" +
+            "/especifica/municipio/diaria/38037?api_key=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3NlYm" +
+            "FnYW5ldGUxM0BnbWFpbC5jb20iLCJqdGkiOiIyNTI5NmRiZC0zY2E4LTQyMWItOWY0Ni05ZjhjODM3MDM" +
+            "2OWIiLCJpc3MiOiJBRU1FVCIsImlhdCI6MTUyMjYwMzg2MywidXNlcklkIjoiMjUyOTZkYmQtM2NhOC00" +
+            "MjFiLTlmNDYtOWY4YzgzNzAzNjliIiwicm9sZSI6IiJ9.lpqOLri3v0KsJKF4N2Vf1R2LfMuGz5A9zeqmgS" +
+            "1uVWo";
 
     // Get JSON with bus stops of the island
     public static void getBusStops(){
@@ -454,6 +465,87 @@ public class Request {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         GetApplicationDataTask.setMonumentCallState(true);
+                    }
+                });
+
+        requestQueue.add(stringRequest);
+    }
+
+    // Get JSON with the weather information
+    public static void getWeatherInfo(){
+
+        StringRequest stringRequest = new StringRequest(com.android.volley.Request.Method.GET, WEATHER_API,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            // Get url with data
+                            JSONObject obj = new JSONObject(response);
+                            String url = obj.get(Weather.dataKey).toString();
+
+                            // Send request for wheather information
+                            StringRequest stringRequest = new StringRequest(com.android.volley.Request.Method.GET, url,
+                                    new Response.Listener<String>() {
+                                        @Override
+                                        public void onResponse(String response) {
+                                            try {
+                                                // Save wheather information
+                                                Weather weather = new Weather();
+
+                                                JSONArray obj = new JSONArray(response);
+                                                JSONArray jArray = obj.getJSONObject(0).getJSONObject(Weather.predictionKey).getJSONArray(Weather.dayKey);
+
+                                                // Save prediction for each day
+                                                for (int i=0; i<jArray.length(); i++) {
+
+                                                    JSONObject currentObject = jArray.getJSONObject(i);
+
+                                                    // Object where the day weather is saved
+                                                    DayWeather day = new DayWeather();
+
+                                                    // Get precipitation probability
+                                                    Precipitation precipitation = new Precipitation();
+
+                                                    JSONArray precipitationArray = currentObject.getJSONArray(Precipitation.probPrecipitationKey);
+
+                                                    // Get first value
+                                                    int j = 0;
+                                                    while(precipitationArray.getJSONObject(j).get(
+                                                            Precipitation.probPrecipitationValueKey).toString().isEmpty()){
+                                                        j++;
+                                                    }
+
+                                                    // Save precipitation value
+                                                    precipitation.setmPrecipitationValue(precipitationArray.getJSONObject(j).get(
+                                                            Precipitation.probPrecipitationValueKey).toString());
+
+                                                    // Save day prediction
+                                                    day.setmPrecipitation(precipitation);
+
+                                                    // Add day prediction to weather information
+                                                    weather.getmDayWeatherList().add(day);
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    },
+                                    new Response.ErrorListener() {
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+                                        }
+                                    });
+
+                            requestQueue.add(stringRequest);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
                     }
                 });
 

@@ -9,6 +9,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.jose.smartlapalma.Models.InterestPlaces.ArcheologicalSite;
 import com.example.jose.smartlapalma.Models.Meteorology.DayWeather;
 import com.example.jose.smartlapalma.Models.Meteorology.Precipitation;
+import com.example.jose.smartlapalma.Models.Meteorology.SkyState;
 import com.example.jose.smartlapalma.Models.Meteorology.Weather;
 import com.example.jose.smartlapalma.Models.Transports.BusStop;
 import com.example.jose.smartlapalma.Models.InterestPlaces.Church;
@@ -493,6 +494,8 @@ public class Request {
                                                 // Save wheather information
                                                 Weather weather = new Weather();
 
+                                                int j = 0;
+
                                                 JSONArray obj = new JSONArray(response);
                                                 JSONArray jArray = obj.getJSONObject(0).getJSONObject(Weather.predictionKey).getJSONArray(Weather.dayKey);
 
@@ -510,7 +513,6 @@ public class Request {
                                                     JSONArray precipitationArray = currentObject.getJSONArray(Precipitation.probPrecipitationKey);
 
                                                     // Get first value
-                                                    int j = 0;
                                                     while(precipitationArray.getJSONObject(j).get(
                                                             Precipitation.probPrecipitationValueKey).toString().isEmpty()){
                                                         j++;
@@ -520,11 +522,35 @@ public class Request {
                                                     precipitation.setmPrecipitationValue(precipitationArray.getJSONObject(j).get(
                                                             Precipitation.probPrecipitationValueKey).toString());
 
+                                                    // Get skyState
+                                                    SkyState skyState = new SkyState();
+
+                                                    JSONArray skyStateArray = currentObject.getJSONArray(SkyState.skyStateKey);
+
+                                                    // Get first value
+                                                    j = 0;
+                                                    while(skyStateArray.getJSONObject(j).get(
+                                                            SkyState.valueKey).toString().isEmpty()){
+                                                        j++;
+                                                    }
+
+                                                    // Save sky state values
+                                                    skyState.setmValue(skyStateArray.getJSONObject(j).get(
+                                                            SkyState.valueKey).toString());
+                                                    skyState.setmDescription(skyStateArray.getJSONObject(j).get(
+                                                            SkyState.descriptionKey).toString());
+
                                                     // Save day prediction
                                                     day.setmPrecipitation(precipitation);
+                                                    day.setmSkyState(skyState);
 
                                                     // Add day prediction to weather information
                                                     weather.getmDayWeatherList().add(day);
+                                                }
+
+                                                for(int i=0; i<weather.getmDayWeatherList().size(); i++){
+                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmSkyState().getmValue());
+                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmSkyState().getmDescription());
                                                 }
                                             } catch (JSONException e) {
                                                 e.printStackTrace();

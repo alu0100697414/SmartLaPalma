@@ -73,6 +73,11 @@
             android:name=".Views.Activities.InterestPlacesActivity"
             android:configChanges="orientation"
             android:label="@string/interest_activity_name"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Views.Activities.MeteorologyActivity"
+            android:configChanges="orientation"
+            android:label="@string/meteo_activity_name"
             android:screenOrientation="portrait"/>
     </application>
 

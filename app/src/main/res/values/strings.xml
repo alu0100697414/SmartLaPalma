@@ -10,6 +10,7 @@
     <string name="bus_activity_name">Paradas de autobús</string>
     <string name="taxi_activity_name">Paradas de taxi</string>
     <string name="interest_activity_name">Lugares de interés</string>
+    <string name="meteo_activity_name">Meteorología</string>
 
     <!--Material Drawer-->
     <string name="resident">Residente</string>

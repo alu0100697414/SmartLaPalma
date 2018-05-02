@@ -14,6 +14,7 @@ import com.example.jose.smartlapalma.Views.Activities.AboutActivity;
 import com.example.jose.smartlapalma.Views.Activities.ContactActivity;
 import com.example.jose.smartlapalma.Views.Activities.InterestPlacesActivity;
 import com.example.jose.smartlapalma.Views.Activities.MainActivity;
+import com.example.jose.smartlapalma.Views.Activities.MeteorologyActivity;
 import com.example.jose.smartlapalma.Views.Activities.NewsActivity;
 import com.example.jose.smartlapalma.Views.Activities.TransportsActivity;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -139,6 +140,10 @@ public class CustomMaterialDrawer {
                                 openNewsActivity();
                                 break;
 
+                            case 3: // Open meteo activity
+                                openMeteoActivity();
+                                break;
+
                             case 4: // Open transports activity
                                 openTransportsActivity();
                                 break;
@@ -254,6 +259,10 @@ public class CustomMaterialDrawer {
                                 openNewsActivity();
                                 break;
 
+                            case 3: // Open meteo activity
+                                openMeteoActivity();
+                                break;
+
                             case 4: // Open transports activity
                                 openTransportsActivity();
                                 break;
@@ -284,6 +293,18 @@ public class CustomMaterialDrawer {
     private void openNewsActivity(){
 
         Intent intent = new Intent(mActivity, NewsActivity.class);
+
+        if(!mActivity.getClass().getSimpleName().equals("MainActivity")){
+            mActivity.finish();
+        }
+
+        mActivity.startActivity(intent);
+    }
+
+    // This function open the meteo screen
+    private void openMeteoActivity(){
+
+        Intent intent = new Intent(mActivity, MeteorologyActivity.class);
 
         if(!mActivity.getClass().getSimpleName().equals("MainActivity")){
             mActivity.finish();

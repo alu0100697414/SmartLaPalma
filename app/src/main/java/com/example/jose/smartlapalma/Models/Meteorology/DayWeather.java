@@ -12,6 +12,8 @@ public class DayWeather {
     private Humidity mHumidity;
     private UV mUV;
 
+    private String mDate;
+
     public Precipitation getmPrecipitation() {
         return mPrecipitation;
     }
@@ -66,5 +68,13 @@ public class DayWeather {
 
     public void setmUV(UV mUV) {
         this.mUV = mUV;
+    }
+
+    public String getmDate() {
+        return mDate;
+    }
+
+    public void setmDate(String mDate) {
+        this.mDate = mDate;
     }
 }

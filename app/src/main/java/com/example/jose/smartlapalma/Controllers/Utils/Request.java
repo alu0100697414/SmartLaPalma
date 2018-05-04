@@ -613,13 +613,14 @@ public class Request {
                                                     day.setmThermalSensation(thermalSensation);
                                                     day.setmHumidity(humidity);
                                                     day.setmUV(uv);
+                                                    day.setmDate(currentObject.get(DayWeather.dateKey).toString());
 
                                                     // Add day prediction to weather information
                                                     weather.getmDayWeatherList().add(day);
                                                 }
 
                                                 for(int i=0; i<weather.getmDayWeatherList().size(); i++){
-                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmUV().getmUV());
+                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmDate());
                                                 }
                                             } catch (JSONException e) {
                                                 e.printStackTrace();

@@ -10,6 +10,7 @@ import com.example.jose.smartlapalma.Models.InterestPlaces.ArcheologicalSite;
 import com.example.jose.smartlapalma.Models.Meteorology.DayWeather;
 import com.example.jose.smartlapalma.Models.Meteorology.Precipitation;
 import com.example.jose.smartlapalma.Models.Meteorology.SkyState;
+import com.example.jose.smartlapalma.Models.Meteorology.Temperature;
 import com.example.jose.smartlapalma.Models.Meteorology.Weather;
 import com.example.jose.smartlapalma.Models.Meteorology.Wind;
 import com.example.jose.smartlapalma.Models.Transports.BusStop;
@@ -559,18 +560,30 @@ public class Request {
                                                     wind.setmVelocity(windArray.getJSONObject(j).get(
                                                             Wind.velocityKey).toString());
 
+                                                    // Get temperature
+                                                    Temperature temperature = new Temperature();
+
+                                                    JSONObject temperatureObject = currentObject.getJSONObject(Temperature.temperatureKey);
+
+                                                    // Save temperature values
+                                                    temperature.setmMax(temperatureObject.get(
+                                                            Temperature.maxKey).toString());
+                                                    temperature.setmMin(temperatureObject.get(
+                                                            Temperature.minKey).toString());
+
                                                     // Save day prediction
                                                     day.setmPrecipitation(precipitation);
                                                     day.setmSkyState(skyState);
                                                     day.setmWind(wind);
+                                                    day.setmTemperature(temperature);
 
                                                     // Add day prediction to weather information
                                                     weather.getmDayWeatherList().add(day);
                                                 }
 
                                                 for(int i=0; i<weather.getmDayWeatherList().size(); i++){
-                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmWind().getmDirection());
-                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmWind().getmVelocity());
+                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmTemperature().getmMax());
+                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmTemperature().getmMin());
                                                 }
                                             } catch (JSONException e) {
                                                 e.printStackTrace();

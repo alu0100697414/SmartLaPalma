@@ -11,6 +11,7 @@ import com.example.jose.smartlapalma.Models.Meteorology.DayWeather;
 import com.example.jose.smartlapalma.Models.Meteorology.Precipitation;
 import com.example.jose.smartlapalma.Models.Meteorology.SkyState;
 import com.example.jose.smartlapalma.Models.Meteorology.Weather;
+import com.example.jose.smartlapalma.Models.Meteorology.Wind;
 import com.example.jose.smartlapalma.Models.Transports.BusStop;
 import com.example.jose.smartlapalma.Models.InterestPlaces.Church;
 import com.example.jose.smartlapalma.Models.InterestPlaces.Library;
@@ -540,17 +541,36 @@ public class Request {
                                                     skyState.setmDescription(skyStateArray.getJSONObject(j).get(
                                                             SkyState.descriptionKey).toString());
 
+                                                    // Get wind
+                                                    Wind wind = new Wind();
+
+                                                    JSONArray windArray = currentObject.getJSONArray(Wind.windKey);
+
+                                                    // Get first value
+                                                    j = 0;
+                                                    while(windArray.getJSONObject(j).get(
+                                                            Wind.directionKey).toString().isEmpty()){
+                                                        j++;
+                                                    }
+
+                                                    // Save wind values
+                                                    wind.setmDirection(windArray.getJSONObject(j).get(
+                                                            Wind.directionKey).toString());
+                                                    wind.setmVelocity(windArray.getJSONObject(j).get(
+                                                            Wind.velocityKey).toString());
+
                                                     // Save day prediction
                                                     day.setmPrecipitation(precipitation);
                                                     day.setmSkyState(skyState);
+                                                    day.setmWind(wind);
 
                                                     // Add day prediction to weather information
                                                     weather.getmDayWeatherList().add(day);
                                                 }
 
                                                 for(int i=0; i<weather.getmDayWeatherList().size(); i++){
-                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmSkyState().getmValue());
-                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmSkyState().getmDescription());
+                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmWind().getmDirection());
+                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmWind().getmVelocity());
                                                 }
                                             } catch (JSONException e) {
                                                 e.printStackTrace();

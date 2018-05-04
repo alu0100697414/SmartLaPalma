@@ -13,6 +13,7 @@ import com.example.jose.smartlapalma.Models.Meteorology.Precipitation;
 import com.example.jose.smartlapalma.Models.Meteorology.SkyState;
 import com.example.jose.smartlapalma.Models.Meteorology.Temperature;
 import com.example.jose.smartlapalma.Models.Meteorology.ThermalSensation;
+import com.example.jose.smartlapalma.Models.Meteorology.UV;
 import com.example.jose.smartlapalma.Models.Meteorology.Weather;
 import com.example.jose.smartlapalma.Models.Meteorology.Wind;
 import com.example.jose.smartlapalma.Models.Transports.BusStop;
@@ -595,6 +596,15 @@ public class Request {
                                                     humidity.setmMin(humidityObject.get(
                                                             Humidity.minKey).toString());
 
+                                                    // Get UV
+                                                    UV uv = new UV();
+
+                                                    if(currentObject.has(UV.uVKey)){
+                                                        uv.setmUV(currentObject.get(UV.uVKey).toString());
+                                                    } else {
+                                                        uv.setmUV("");
+                                                    }
+
                                                     // Save day prediction
                                                     day.setmPrecipitation(precipitation);
                                                     day.setmSkyState(skyState);
@@ -602,14 +612,14 @@ public class Request {
                                                     day.setmTemperature(temperature);
                                                     day.setmThermalSensation(thermalSensation);
                                                     day.setmHumidity(humidity);
+                                                    day.setmUV(uv);
 
                                                     // Add day prediction to weather information
                                                     weather.getmDayWeatherList().add(day);
                                                 }
 
                                                 for(int i=0; i<weather.getmDayWeatherList().size(); i++){
-                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmHumidity().getmMax());
-                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmHumidity().getmMin());
+                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmUV().getmUV());
                                                 }
                                             } catch (JSONException e) {
                                                 e.printStackTrace();

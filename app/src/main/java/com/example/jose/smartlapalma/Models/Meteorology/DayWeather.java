@@ -10,6 +10,7 @@ public class DayWeather {
     private Temperature mTemperature;
     private ThermalSensation mThermalSensation;
     private Humidity mHumidity;
+    private UV mUV;
 
     public Precipitation getmPrecipitation() {
         return mPrecipitation;
@@ -57,5 +58,13 @@ public class DayWeather {
 
     public void setmHumidity(Humidity mHumidity) {
         this.mHumidity = mHumidity;
+    }
+
+    public UV getmUV() {
+        return mUV;
+    }
+
+    public void setmUV(UV mUV) {
+        this.mUV = mUV;
     }
 }

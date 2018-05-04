@@ -496,6 +496,10 @@ public class Request {
                                         @Override
                                         public void onResponse(String response) {
                                             try {
+                                                // Get instance of singleton class and clear previuos data
+                                                OpenDataLaPalma openDataLaPalma = OpenDataLaPalma.getInstance();
+                                                openDataLaPalma.setmWeather(new Weather());
+
                                                 // Save wheather information
                                                 Weather weather = new Weather();
 
@@ -619,9 +623,9 @@ public class Request {
                                                     weather.getmDayWeatherList().add(day);
                                                 }
 
-                                                for(int i=0; i<weather.getmDayWeatherList().size(); i++){
-                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmDate());
-                                                }
+                                                // Save weather information
+                                                openDataLaPalma.setmWeather(weather);
+
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
                                             }

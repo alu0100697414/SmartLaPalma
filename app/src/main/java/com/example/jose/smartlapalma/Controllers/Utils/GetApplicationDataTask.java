@@ -30,6 +30,7 @@ public class GetApplicationDataTask extends AsyncTask<Void, Integer, Boolean> {
     private volatile static boolean archeologicalSiteCallState;
     private volatile static boolean libraryCallState;
     private volatile static boolean monumentCallState;
+    private volatile static boolean weatherCallState;
 
     public GetApplicationDataTask(Context context, OpenDataLaPalma openDataLaPalma){
 
@@ -43,6 +44,7 @@ public class GetApplicationDataTask extends AsyncTask<Void, Integer, Boolean> {
         archeologicalSiteCallState = true;
         libraryCallState = true;
         monumentCallState = true;
+        weatherCallState = true;
     }
 
     @Override
@@ -62,7 +64,7 @@ public class GetApplicationDataTask extends AsyncTask<Void, Integer, Boolean> {
         // Wait for resuts of calls
         while(!busStopCallState && !taxiStopCallState && !touristAccommodationCallState
                 && !churchCallState && !archeologicalSiteCallState && !libraryCallState
-                && !monumentCallState){
+                && !monumentCallState && !weatherCallState){
             try {  Thread.sleep(250); }
             catch (InterruptedException e) { e.printStackTrace(); }
         }
@@ -160,5 +162,13 @@ public class GetApplicationDataTask extends AsyncTask<Void, Integer, Boolean> {
 
     public static void setMonumentCallState(boolean monumentCallState) {
         GetApplicationDataTask.monumentCallState = monumentCallState;
+    }
+
+    public static boolean isWeatherCallState() {
+        return weatherCallState;
+    }
+
+    public static void setWeatherCallState(boolean weatherCallState) {
+        GetApplicationDataTask.weatherCallState = weatherCallState;
     }
 }

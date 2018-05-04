@@ -5,6 +5,7 @@ import com.example.jose.smartlapalma.Models.InterestPlaces.Church;
 import com.example.jose.smartlapalma.Models.InterestPlaces.Library;
 import com.example.jose.smartlapalma.Models.InterestPlaces.Monument;
 import com.example.jose.smartlapalma.Models.InterestPlaces.TouristAccommodation;
+import com.example.jose.smartlapalma.Models.Meteorology.Weather;
 import com.example.jose.smartlapalma.Models.Transports.BusStop;
 import com.example.jose.smartlapalma.Models.Transports.TaxiStop;
 
@@ -22,6 +23,7 @@ public class OpenDataLaPalma {
     private List<ArcheologicalSite> mArcheologicalSiteList;
     private List<Library> mLibraryList;
     private List<Monument> mMonumentList;
+    private Weather mWeather;
 
 
     // Private constructor
@@ -34,6 +36,7 @@ public class OpenDataLaPalma {
         mArcheologicalSiteList = new ArrayList<>();
         mLibraryList = new ArrayList<>();
         mMonumentList = new ArrayList<>();
+        mWeather = new Weather();
     }
 
     // Instance
@@ -100,5 +103,13 @@ public class OpenDataLaPalma {
 
     public void setmMonumentList(List<Monument> mMonumentList) {
         this.mMonumentList = mMonumentList;
+    }
+
+    public Weather getmWeather() {
+        return mWeather;
+    }
+
+    public void setmWeather(Weather mWeather) {
+        this.mWeather = mWeather;
     }
 }

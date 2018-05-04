@@ -6,12 +6,15 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.jose.smartlapalma.Controllers.Utils.CustomMaterialDrawer;
+import com.example.jose.smartlapalma.Controllers.Utils.CustomUtils;
 import com.example.jose.smartlapalma.Models.About;
 import com.example.jose.smartlapalma.Models.Meteorology.DayWeather;
 import com.example.jose.smartlapalma.Models.Meteorology.WeatherState;
@@ -24,6 +27,8 @@ public class MeteorologyActivity extends AppCompatActivity {
 
     private final String TAG = "MeteorologyActivity";
 
+    private ViewGroup mMeteoViewItem;
+
     private SharedPreferences mPrefs;
     private int typeUser;
 
@@ -31,6 +36,7 @@ public class MeteorologyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meteorology);
+        mMeteoViewItem = findViewById(R.id.meteo_scroll_view_content);
 
         // Toolbar
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
@@ -98,6 +104,47 @@ public class MeteorologyActivity extends AppCompatActivity {
             TextView todayHumidity = findViewById(R.id.today_humidity);
             todayHumidity.setText(today.getmHumidity().getmMax() +
                     getString(R.string.percentage));
+
+            // Set next days predictions
+            LayoutInflater inflater = LayoutInflater.from(this);
+            int id = R.layout.weather_next_day_item;
+
+            // Add all the days prediction items
+            for(int i=1; i<openDataLaPalma.getmWeather().getmDayWeatherList().size(); i++){
+
+                DayWeather currentDay = openDataLaPalma.getmWeather().getmDayWeatherList().get(i);
+
+                // Inflate about item
+                LinearLayout item = (LinearLayout) inflater.inflate(id, null, false);
+
+                // Set content for the item
+                // Set weather image
+                ImageView imageWeatherItem = item.findViewById(R.id.weather_image_item);
+                imageWeatherItem.setImageResource(getDrawableFromId(currentDay.getmSkyState().getmValue()));
+
+                // Set description
+                TextView descriptionItem = item.findViewById(R.id.weather_description_item);
+                descriptionItem.setText(currentDay.getmSkyState().getmDescription());
+
+                // Set max and min temp
+                TextView maxTemp = item.findViewById(R.id.weather_max_temp_item);
+                maxTemp.setText(currentDay.getmTemperature().getmMax() + getString(R.string.degree));
+
+                TextView minTemp = item.findViewById(R.id.weather_min_temp_item);
+                minTemp.setText(currentDay.getmTemperature().getmMin() + getString(R.string.degree));
+
+                // Custom some styles
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                params.leftMargin = CustomUtils.getDpValues(this, 25f);
+                params.rightMargin = CustomUtils.getDpValues(this, 25f);
+                item.setLayoutParams(params);
+
+                // Add view in parent layout
+                mMeteoViewItem.addView(item);
+            }
         }
 
         else {

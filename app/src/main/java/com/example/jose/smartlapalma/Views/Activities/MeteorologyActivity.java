@@ -3,15 +3,18 @@ package com.example.jose.smartlapalma.Views.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.jose.smartlapalma.Controllers.Utils.CustomMaterialDrawer;
 import com.example.jose.smartlapalma.Models.About;
 import com.example.jose.smartlapalma.Models.Meteorology.DayWeather;
+import com.example.jose.smartlapalma.Models.Meteorology.WeatherState;
 import com.example.jose.smartlapalma.Models.OpenDataLaPalma;
 import com.example.jose.smartlapalma.Models.SharedPreferencesKeys;
 import com.example.jose.smartlapalma.Models.UserType;
@@ -61,6 +64,10 @@ public class MeteorologyActivity extends AppCompatActivity {
             // Set today data (DayWeather pos: 0)
             DayWeather today = openDataLaPalma.getmWeather().getmDayWeatherList().get(0);
 
+            // Set weather image
+            ImageView imageWeather = findViewById(R.id.weather_image);
+            imageWeather.setImageResource(getDrawableFromId(today.getmSkyState().getmValue()));
+
             // Set max and min degrees
             TextView todayMaxDegrees = findViewById(R.id.today_max_degrees);
             TextView todayMinDegrees = findViewById(R.id.today_min_degrees);
@@ -95,6 +102,63 @@ public class MeteorologyActivity extends AppCompatActivity {
 
         else {
             // TODO: SHOW LOAGING ERROR MESSAGE
+        }
+    }
+
+    // Get drawable image of weather
+    private int getDrawableFromId(String id){
+
+        switch (id){
+            case WeatherState.DESPEJADO:
+                return R.drawable.sun;
+            case WeatherState.POCO_NUBOSO:
+                return R.drawable.sun_little_cloud;
+            case WeatherState.INTERVALOS_NUBOSOS:
+                return R.drawable.sun_two_clouds;
+            case WeatherState.NUBOSO:
+                return R.drawable.sun_with_one_cloud;
+            case WeatherState.MUY_NUBOSO:
+                return R.drawable.cloud;
+            case WeatherState.CUBIERTO:
+                return R.drawable.cloud;
+            case WeatherState.NUBES_ALTAS:
+                return R.drawable.cloudy;
+            case WeatherState.INTERVALOS_NUBOSOS_LLUVIA:
+                return R.drawable.rain_sun_cloud;
+            case WeatherState.NUBOSO_LLUVIA:
+                return R.drawable.rain;
+            case WeatherState.MUY_NUBOSO_LLUVIA:
+                return R.drawable.rain;
+            case WeatherState.CUBIERTO_LLUVIA:
+                return R.drawable.rain;
+            case WeatherState.CHUBASCOS:
+                return R.drawable.rain;
+            case WeatherState.INTERVALOS_NUBOSOS_NIEVE:
+                return R.drawable.cloud_sun_snow;
+            case WeatherState.NUBOSO_NIEVE:
+                return R.drawable.snow;
+            case WeatherState.MUY_NUBOSO_NIEVE:
+                return R.drawable.snow;
+            case WeatherState.CUBIERTO_NIEVE:
+                return R.drawable.snow;
+            case WeatherState.INTERVALOS_NUBOSOS_LLUVIA_ESCASA:
+                return R.drawable.rain_sun_cloud;
+            case WeatherState.NUBOSO_LLUVIA_ESCASA:
+                return R.drawable.rain_sun_cloud;
+            case WeatherState.MUY_NUBOSO_LLUVIA_ESCASA:
+                return R.drawable.rain;
+            case WeatherState.TORMENTA:
+                return R.drawable.storm;
+            case WeatherState.GRANIZO:
+                return R.drawable.hail;
+            case WeatherState.BRUMA:
+                return R.drawable.cloudy;
+            case WeatherState.NIEBLA:
+                return R.drawable.haze;
+            case WeatherState.CALIMA:
+                return R.drawable.calima;
+            default:
+                return R.drawable.weather_default;
         }
     }
 

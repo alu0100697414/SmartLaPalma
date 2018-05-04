@@ -62,7 +62,7 @@
     <string name="la_palma">Isla de La Palma</string>
     <string name="rain_probability">Prob. de Lluvia</string>
     <string name="wind">Viento</string>
-    <string name="thermal_sensation">Sens. Térmica</string>
+    <string name="thermal_sensation">S. Térmica</string>
     <string name="humidity">Humedad</string>
     <string name="next_days">PRÓXIMOS DÍAS</string>
     <string name="degree">º</string>

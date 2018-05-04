@@ -8,6 +8,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.jose.smartlapalma.Models.InterestPlaces.ArcheologicalSite;
 import com.example.jose.smartlapalma.Models.Meteorology.DayWeather;
+import com.example.jose.smartlapalma.Models.Meteorology.Humidity;
 import com.example.jose.smartlapalma.Models.Meteorology.Precipitation;
 import com.example.jose.smartlapalma.Models.Meteorology.SkyState;
 import com.example.jose.smartlapalma.Models.Meteorology.Temperature;
@@ -583,20 +584,32 @@ public class Request {
                                                     thermalSensation.setmMin(thermalSensationObject.get(
                                                             ThermalSensation.minKey).toString());
 
+                                                    // Get humidity
+                                                    Humidity humidity = new Humidity();
+
+                                                    JSONObject humidityObject = currentObject.getJSONObject(Humidity.humidityKey);
+
+                                                    // Save humidity values
+                                                    humidity.setmMax(humidityObject.get(
+                                                            Humidity.maxKey).toString());
+                                                    humidity.setmMin(humidityObject.get(
+                                                            Humidity.minKey).toString());
+
                                                     // Save day prediction
                                                     day.setmPrecipitation(precipitation);
                                                     day.setmSkyState(skyState);
                                                     day.setmWind(wind);
                                                     day.setmTemperature(temperature);
                                                     day.setmThermalSensation(thermalSensation);
+                                                    day.setmHumidity(humidity);
 
                                                     // Add day prediction to weather information
                                                     weather.getmDayWeatherList().add(day);
                                                 }
 
                                                 for(int i=0; i<weather.getmDayWeatherList().size(); i++){
-                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmThermalSensation().getmMax());
-                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmThermalSensation().getmMin());
+                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmHumidity().getmMax());
+                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmHumidity().getmMin());
                                                 }
                                             } catch (JSONException e) {
                                                 e.printStackTrace();

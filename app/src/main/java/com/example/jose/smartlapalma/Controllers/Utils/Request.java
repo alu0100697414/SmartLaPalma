@@ -11,6 +11,7 @@ import com.example.jose.smartlapalma.Models.Meteorology.DayWeather;
 import com.example.jose.smartlapalma.Models.Meteorology.Precipitation;
 import com.example.jose.smartlapalma.Models.Meteorology.SkyState;
 import com.example.jose.smartlapalma.Models.Meteorology.Temperature;
+import com.example.jose.smartlapalma.Models.Meteorology.ThermalSensation;
 import com.example.jose.smartlapalma.Models.Meteorology.Weather;
 import com.example.jose.smartlapalma.Models.Meteorology.Wind;
 import com.example.jose.smartlapalma.Models.Transports.BusStop;
@@ -571,19 +572,31 @@ public class Request {
                                                     temperature.setmMin(temperatureObject.get(
                                                             Temperature.minKey).toString());
 
+                                                    // Get thermal sensation
+                                                    ThermalSensation thermalSensation = new ThermalSensation();
+
+                                                    JSONObject thermalSensationObject = currentObject.getJSONObject(ThermalSensation.sensationThermalKey);
+
+                                                    // Save thermal sensation values
+                                                    thermalSensation.setmMax(thermalSensationObject.get(
+                                                            ThermalSensation.maxKey).toString());
+                                                    thermalSensation.setmMin(thermalSensationObject.get(
+                                                            ThermalSensation.minKey).toString());
+
                                                     // Save day prediction
                                                     day.setmPrecipitation(precipitation);
                                                     day.setmSkyState(skyState);
                                                     day.setmWind(wind);
                                                     day.setmTemperature(temperature);
+                                                    day.setmThermalSensation(thermalSensation);
 
                                                     // Add day prediction to weather information
                                                     weather.getmDayWeatherList().add(day);
                                                 }
 
                                                 for(int i=0; i<weather.getmDayWeatherList().size(); i++){
-                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmTemperature().getmMax());
-                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmTemperature().getmMin());
+                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmThermalSensation().getmMax());
+                                                    Log.d(TAG, weather.getmDayWeatherList().get(i).getmThermalSensation().getmMin());
                                                 }
                                             } catch (JSONException e) {
                                                 e.printStackTrace();

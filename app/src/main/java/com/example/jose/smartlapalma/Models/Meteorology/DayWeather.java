@@ -8,6 +8,7 @@ public class DayWeather {
     private SkyState mSkyState;
     private Wind mWind;
     private Temperature mTemperature;
+    private ThermalSensation mThermalSensation;
 
     public Precipitation getmPrecipitation() {
         return mPrecipitation;
@@ -39,5 +40,13 @@ public class DayWeather {
 
     public void setmTemperature(Temperature mTemperature) {
         this.mTemperature = mTemperature;
+    }
+
+    public ThermalSensation getmThermalSensation() {
+        return mThermalSensation;
+    }
+
+    public void setmThermalSensation(ThermalSensation mThermalSensation) {
+        this.mThermalSensation = mThermalSensation;
     }
 }

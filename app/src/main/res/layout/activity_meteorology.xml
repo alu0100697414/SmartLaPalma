@@ -33,12 +33,21 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textSize="35dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:text="@string/la_palma"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="25dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -56,16 +65,16 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/today_max_degrees"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
-                        android:text="19º"
                         android:textSize="25dp" />
 
                     <TextView
+                        android:id="@+id/today_min_degrees"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="11º"
                         android:textSize="25dp" />
                 </LinearLayout>
 
@@ -77,11 +86,11 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/uv_value"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
                         android:layout_gravity="center_vertical"
-                        android:text="4"
                         android:textSize="13dp" />
 
                     <ImageView
@@ -92,13 +101,13 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/today_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="25dp"
                 android:gravity="center"
-                android:text="Soleado con algunos intervalos nubosos"
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
@@ -131,13 +140,13 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Prob. de Lluvia"
+                            android:text="@string/rain_probability"
                             android:textSize="12dp" />
 
                         <TextView
+                            android:id="@+id/today_rain_probability"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="15%"
                             android:textSize="14dp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -161,14 +170,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="right"
-                            android:text="Viento"
+                            android:text="@string/wind"
                             android:textSize="12dp" />
 
                         <TextView
+                            android:id="@+id/today_wind"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="right"
-                            android:text="45km/h"
                             android:textSize="14dp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -211,13 +220,13 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Sens. Térmica"
+                            android:text="@string/thermal_sensation"
                             android:textSize="12dp" />
 
                         <TextView
+                            android:id="@+id/today_thermal_sensation"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="21º"
                             android:textSize="14dp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -241,14 +250,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="right"
-                            android:text="Humedad"
+                            android:text="@string/humidity"
                             android:textSize="12dp" />
 
                         <TextView
+                            android:id="@+id/today_humidity"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="right"
-                            android:text="89%"
                             android:textSize="14dp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -267,10 +276,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginTop="25dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginBottom="25dp"
+                android:background="@drawable/top_and_bottom_border"
                 android:gravity="center"
-                android:text="Próximos días"
+                android:text="@string/next_days"
                 android:textSize="16dp"
                 android:textStyle="bold" />
 

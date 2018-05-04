@@ -58,6 +58,17 @@
     <string name="monument">Monumento:</string>
     <string name="direction_not_available">Dirección no disponible</string>
 
+    <!--Meteo Activity-->
+    <string name="la_palma">Isla de La Palma</string>
+    <string name="rain_probability">Prob. de Lluvia</string>
+    <string name="wind">Viento</string>
+    <string name="thermal_sensation">Sens. Térmica</string>
+    <string name="humidity">Humedad</string>
+    <string name="next_days">PRÓXIMOS DÍAS</string>
+    <string name="degree">º</string>
+    <string name="percentage">%</string>
+    <string name="velocity">km/h</string>
+
     <!--Errors-->
     <string name="gps_conection_error">Se ha producido un error al obtener la posición GPS</string>
     <string name="gps_not_available">No se mostrará su ubicación en el mapa</string>

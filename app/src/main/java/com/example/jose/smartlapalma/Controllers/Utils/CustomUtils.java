@@ -6,6 +6,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.DisplayMetrics;
 
+import com.example.jose.smartlapalma.Models.Months;
+import com.example.jose.smartlapalma.R;
+
 /**
  * Created by Jose on 18/04/2018.
  */
@@ -76,5 +79,42 @@ public class CustomUtils {
         double seconds = Double.valueOf(temp[2].replaceFirst(",", "."));
 
         return Math.signum(degrees) * (Math.abs(degrees) + (minutes / 60.0) + (seconds / 3600.0));
+    }
+
+    /****
+     * This function return the formmatted month from a number
+     * @param context Application context
+     * @param number Number of month
+     * @return
+     */
+    public static String getMonthFromNumber(Context context, String number){
+        switch (number){
+            case Months.JANUARY:
+                return context.getString(R.string.january);
+            case Months.FEBRUARY:
+                return context.getString(R.string.february);
+            case Months.MARCH:
+                return context.getString(R.string.march);
+            case Months.APRIL:
+                return context.getString(R.string.april);
+            case Months.MAY:
+                return context.getString(R.string.may);
+            case Months.JUNE:
+                return context.getString(R.string.june);
+            case Months.JULY:
+                return context.getString(R.string.july);
+            case Months.AUGUST:
+                return context.getString(R.string.august);
+            case Months.SEPTEMBER:
+                return context.getString(R.string.september);
+            case Months.OCTOBER:
+                return context.getString(R.string.october);
+            case Months.NOVEMBER:
+                return context.getString(R.string.november);
+            case Months.DECEMBER:
+                return context.getString(R.string.december);
+            default:
+                return "";
+        }
     }
 }

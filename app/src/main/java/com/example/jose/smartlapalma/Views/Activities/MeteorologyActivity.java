@@ -118,6 +118,10 @@ public class MeteorologyActivity extends AppCompatActivity {
                 LinearLayout item = (LinearLayout) inflater.inflate(id, null, false);
 
                 // Set content for the item
+                // Set date
+                TextView dateItem = item.findViewById(R.id.weather_day_item);
+                dateItem.setText(getFormattedDate(currentDay.getmDate()));
+
                 // Set weather image
                 ImageView imageWeatherItem = item.findViewById(R.id.weather_image_item);
                 imageWeatherItem.setImageResource(getDrawableFromId(currentDay.getmSkyState().getmValue()));
@@ -207,6 +211,13 @@ public class MeteorologyActivity extends AppCompatActivity {
             default:
                 return R.drawable.weather_default;
         }
+    }
+
+    private String getFormattedDate(String date){
+
+        String temp[] = date.split("-");
+
+        return temp[2] + " " + CustomUtils.getMonthFromNumber(getApplicationContext(), temp[1]);
     }
 
     @Override

@@ -3,11 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_screen"
     tools:context=".Views.Fragments.ResidentFragment">
 
-    <TextView
+    <ScrollView
+        android:id="@+id/meteo_scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="resident!!" />
+        android:layout_height="wrap_content"
+        android:scrollbarStyle="outsideInset" >
+
+        <LinearLayout
+            android:id="@+id/meteo_scroll_view_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textSize="35dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:text="@string/resident_fragment_news_title"/>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/news_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="25dp" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

@@ -93,4 +93,7 @@
     <string name="yes">SÍ</string>
     <string name="no">NO</string>
 
+    <!--Resident fragment-->
+    <string name="resident_fragment_news_title">Últimas noticias</string>
+
 </resources>

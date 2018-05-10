@@ -95,7 +95,8 @@
 
     <!--Resident fragment-->
     <string name="resident_fragment_news_title">Últimas noticias</string>
-    <string name="resident_fragment_news_subtitle">(Desliza hacia los lados)</string>
+    <string name="resident_fragment_news_subtitle">Desliza hacia los lados o pulsa sobre una noticia si quieres saber más</string>
+    <string name="resident_fragment_weather_subtitle">Para más información diríjase a la sección de meteorología</string>
     <string name="weather_today">Hoy en La Palma</string>
 
 </resources>

@@ -17,7 +17,10 @@ import android.widget.TextView;
 import com.example.jose.smartlapalma.Controllers.Adapters.NewsListAdapter;
 import com.example.jose.smartlapalma.Controllers.Adapters.NewsViewPagerAdapter;
 import com.example.jose.smartlapalma.Controllers.Utils.CustomUtils;
+import com.example.jose.smartlapalma.Models.Meteorology.DayWeather;
+import com.example.jose.smartlapalma.Models.Meteorology.WeatherState;
 import com.example.jose.smartlapalma.Models.News.New;
+import com.example.jose.smartlapalma.Models.OpenDataLaPalma;
 import com.example.jose.smartlapalma.Models.SharedPreferencesKeys;
 import com.example.jose.smartlapalma.Models.UserType;
 import com.example.jose.smartlapalma.R;
@@ -130,7 +133,36 @@ public class ResidentFragment extends Fragment {
         ScrollView scrollView = mRootView.findViewById(R.id.resident_fragment_scroll_view);
         scrollView.setVisibility(View.VISIBLE);
 
-        // Set data in view
+        // Set weather information
+        // Load weather information
+        OpenDataLaPalma openDataLaPalma = OpenDataLaPalma.getInstance();
+
+        if(!openDataLaPalma.getmWeather().getmDayWeatherList().isEmpty()){
+
+            // Set today data (DayWeather pos: 0)
+            DayWeather today = openDataLaPalma.getmWeather().getmDayWeatherList().get(0);
+
+            // Set weather image
+            ImageView imageWeather = mRootView.findViewById(R.id.weather_image);
+            imageWeather.setImageResource(getDrawableFromId(today.getmSkyState().getmValue()));
+
+            // Set max and min degrees
+            TextView todayMaxDegrees = mRootView.findViewById(R.id.today_max_degrees);
+            TextView todayMinDegrees = mRootView.findViewById(R.id.today_min_degrees);
+
+            todayMaxDegrees.setText(today.getmTemperature().getmMax() + getString(R.string.degree));
+            todayMinDegrees.setText(today.getmTemperature().getmMin() + getString(R.string.degree));
+
+            // Set UV
+            TextView todayUV = mRootView.findViewById(R.id.uv_value);
+            todayUV.setText(today.getmUV().getmUV());
+
+            // Set description
+            TextView todayDescription = mRootView.findViewById(R.id.today_description);
+            todayDescription.setText(today.getmSkyState().getmDescription());
+        }
+
+        // Set news in view
         ViewPager viewPager =  getActivity().findViewById(R.id.news_viewpager);
         viewPager.setAdapter(new NewsViewPagerAdapter(getActivity(), mNewsList));
     }
@@ -148,6 +180,63 @@ public class ResidentFragment extends Fragment {
 
             ImageView errorImage = getActivity().findViewById(R.id.error_imageview);
             errorImage.setVisibility(View.VISIBLE);
+        }
+    }
+
+    // Get drawable image of weather
+    private int getDrawableFromId(String id){
+
+        switch (id){
+            case WeatherState.DESPEJADO:
+                return R.drawable.sun;
+            case WeatherState.POCO_NUBOSO:
+                return R.drawable.sun_little_cloud;
+            case WeatherState.INTERVALOS_NUBOSOS:
+                return R.drawable.sun_two_clouds;
+            case WeatherState.NUBOSO:
+                return R.drawable.sun_with_one_cloud;
+            case WeatherState.MUY_NUBOSO:
+                return R.drawable.cloud;
+            case WeatherState.CUBIERTO:
+                return R.drawable.cloud;
+            case WeatherState.NUBES_ALTAS:
+                return R.drawable.cloudy;
+            case WeatherState.INTERVALOS_NUBOSOS_LLUVIA:
+                return R.drawable.rain_sun_cloud;
+            case WeatherState.NUBOSO_LLUVIA:
+                return R.drawable.rain;
+            case WeatherState.MUY_NUBOSO_LLUVIA:
+                return R.drawable.rain;
+            case WeatherState.CUBIERTO_LLUVIA:
+                return R.drawable.rain;
+            case WeatherState.CHUBASCOS:
+                return R.drawable.rain;
+            case WeatherState.INTERVALOS_NUBOSOS_NIEVE:
+                return R.drawable.cloud_sun_snow;
+            case WeatherState.NUBOSO_NIEVE:
+                return R.drawable.snow;
+            case WeatherState.MUY_NUBOSO_NIEVE:
+                return R.drawable.snow;
+            case WeatherState.CUBIERTO_NIEVE:
+                return R.drawable.snow;
+            case WeatherState.INTERVALOS_NUBOSOS_LLUVIA_ESCASA:
+                return R.drawable.rain_sun_cloud;
+            case WeatherState.NUBOSO_LLUVIA_ESCASA:
+                return R.drawable.rain_sun_cloud;
+            case WeatherState.MUY_NUBOSO_LLUVIA_ESCASA:
+                return R.drawable.rain;
+            case WeatherState.TORMENTA:
+                return R.drawable.storm;
+            case WeatherState.GRANIZO:
+                return R.drawable.hail;
+            case WeatherState.BRUMA:
+                return R.drawable.cloudy;
+            case WeatherState.NIEBLA:
+                return R.drawable.haze;
+            case WeatherState.CALIMA:
+                return R.drawable.calima;
+            default:
+                return R.drawable.weather_default;
         }
     }
 }

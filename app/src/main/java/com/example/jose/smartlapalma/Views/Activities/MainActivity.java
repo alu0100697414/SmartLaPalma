@@ -9,6 +9,8 @@ import com.example.jose.smartlapalma.Controllers.Utils.CustomMaterialDrawer;
 import com.example.jose.smartlapalma.Models.SharedPreferencesKeys;
 import com.example.jose.smartlapalma.Models.UserType;
 import com.example.jose.smartlapalma.R;
+import com.example.jose.smartlapalma.Views.Fragments.ResidentFragment;
+import com.example.jose.smartlapalma.Views.Fragments.TouristFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,8 +38,30 @@ public class MainActivity extends AppCompatActivity {
 
         if(typeUser == UserType.RESIDENT_USER){
             customMaterialDrawer.setResidentMode();
+
+            // Load resident fragment
+            if (savedInstanceState == null) {
+                ResidentFragment fragment = new ResidentFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.main_fragment, fragment)
+                        .commit();
+            }
         } else {
             customMaterialDrawer.setTouristMode();
+
+            // Load resident fragment
+            if (savedInstanceState == null) {
+                TouristFragment fragment = new TouristFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.main_fragment, fragment)
+                        .commit();
+            }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

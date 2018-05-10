@@ -14,6 +14,8 @@ import com.example.jose.smartlapalma.Views.Fragments.TouristFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final String TAG = "NewsActivity";
+
     private SharedPreferences mPrefs;
 
     private int typeUser;

@@ -6,25 +6,28 @@ import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.jose.smartlapalma.Models.News.New;
 import com.example.jose.smartlapalma.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class NewsViewPagerAdapter extends PagerAdapter {
 
-    private ArrayList<String> items;
+    private static final int LAST_NEWS_NUMBER = 3;
 
     private Context mContext;
 
-    public NewsViewPagerAdapter(Context context) {
-        mContext = context;
+    private ArrayList<New> mNewsList;
 
-        items = new ArrayList<>();
-        items.add("AAAAAAAA");
-        items.add("BBBBBBBB");
-        items.add("CCCCCCCC");
+    public NewsViewPagerAdapter(Context context, ArrayList<New> list) {
+        mContext = context;
+        mNewsList = list;
     }
 
     @Override
@@ -35,8 +38,35 @@ public class NewsViewPagerAdapter extends PagerAdapter {
         ViewGroup layout = (ViewGroup) inflater.inflate(R.layout.news_viewpager_item, collection,
                 false);
 
-        TextView textView = layout.findViewById(R.id.test_viewpager_item);
-        textView.setText(items.get(position));
+        // Get current object
+        final New currentNew = mNewsList.get(position);
+
+        // Set values in item
+        TextView title = layout.findViewById(R.id.title_item);
+        title.setText(currentNew.getmTitle());
+
+        TextView subtitle = layout.findViewById(R.id.subtitle_item);
+        subtitle.setText(currentNew.getmDescription());
+
+        final RelativeLayout background = layout.findViewById(R.id.relativelayout_viewpager_item);
+        final ImageView temporalImage = new ImageView(mContext);
+
+        final LinearLayout spinner = layout.findViewById(R.id.image_item_progress);
+        spinner.setVisibility(View.VISIBLE);
+
+        Picasso.with(mContext).load(currentNew.getmImageUrl())
+                .into(temporalImage, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        spinner.setVisibility(View.GONE);
+                        background.setBackground(temporalImage.getDrawable());
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
 
         collection.addView(layout);
 
@@ -50,7 +80,7 @@ public class NewsViewPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return LAST_NEWS_NUMBER;
     }
 
     @Override

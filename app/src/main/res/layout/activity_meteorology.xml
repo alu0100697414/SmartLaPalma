@@ -26,7 +26,7 @@
         android:id="@+id/meteo_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbarStyle="outsideInset" >
+        android:scrollbarStyle="insideOverlay" >
 
         <LinearLayout
             android:id="@+id/meteo_scroll_view_content"

@@ -95,5 +95,6 @@
 
     <!--Resident fragment-->
     <string name="resident_fragment_news_title">Últimas noticias</string>
+    <string name="resident_fragment_news_subtitle">(Desliza hacia los lados)</string>
 
 </resources>

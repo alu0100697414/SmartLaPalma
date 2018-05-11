@@ -121,52 +121,55 @@ public class ResidentFragment extends Fragment {
     // This method sets firebase data in the layout
     private void setDataInView(){
 
-        // Hide spinner when data is loaded
-        mProgressBar.setVisibility(View.GONE);
+        if(getActivity() != null){
+            
+            // Hide spinner when data is loaded
+            mProgressBar.setVisibility(View.GONE);
 
-        // Hide error message possible network error
-        TextView error = mRootView.findViewById(R.id.error_request);
-        error.setVisibility(View.GONE);
+            // Hide error message possible network error
+            TextView error = mRootView.findViewById(R.id.error_request);
+            error.setVisibility(View.GONE);
 
-        ImageView errorImage = mRootView.findViewById(R.id.error_imageview);
-        errorImage.setVisibility(View.GONE);
+            ImageView errorImage = mRootView.findViewById(R.id.error_imageview);
+            errorImage.setVisibility(View.GONE);
 
-        // Make visible the content
-        ScrollView scrollView = mRootView.findViewById(R.id.resident_fragment_scroll_view);
-        scrollView.setVisibility(View.VISIBLE);
+            // Make visible the content
+            ScrollView scrollView = mRootView.findViewById(R.id.resident_fragment_scroll_view);
+            scrollView.setVisibility(View.VISIBLE);
 
-        // Set weather information
-        // Load weather information
-        OpenDataLaPalma openDataLaPalma = OpenDataLaPalma.getInstance();
+            // Set weather information
+            // Load weather information
+            OpenDataLaPalma openDataLaPalma = OpenDataLaPalma.getInstance();
 
-        if(!openDataLaPalma.getmWeather().getmDayWeatherList().isEmpty()){
+            if(!openDataLaPalma.getmWeather().getmDayWeatherList().isEmpty()){
 
-            // Set today data (DayWeather pos: 0)
-            DayWeather today = openDataLaPalma.getmWeather().getmDayWeatherList().get(0);
+                // Set today data (DayWeather pos: 0)
+                DayWeather today = openDataLaPalma.getmWeather().getmDayWeatherList().get(0);
 
-            // Set weather image
-            ImageView imageWeather = mRootView.findViewById(R.id.weather_image);
-            imageWeather.setImageResource(getDrawableFromId(today.getmSkyState().getmValue()));
+                // Set weather image
+                ImageView imageWeather = mRootView.findViewById(R.id.weather_image);
+                imageWeather.setImageResource(getDrawableFromId(today.getmSkyState().getmValue()));
 
-            // Set max and min degrees
-            TextView todayMaxDegrees = mRootView.findViewById(R.id.today_max_degrees);
-            TextView todayMinDegrees = mRootView.findViewById(R.id.today_min_degrees);
+                // Set max and min degrees
+                TextView todayMaxDegrees = mRootView.findViewById(R.id.today_max_degrees);
+                TextView todayMinDegrees = mRootView.findViewById(R.id.today_min_degrees);
 
-            todayMaxDegrees.setText(today.getmTemperature().getmMax() + getString(R.string.degree));
-            todayMinDegrees.setText(today.getmTemperature().getmMin() + getString(R.string.degree));
+                todayMaxDegrees.setText(today.getmTemperature().getmMax() + getString(R.string.degree));
+                todayMinDegrees.setText(today.getmTemperature().getmMin() + getString(R.string.degree));
 
-            // Set UV
-            TextView todayUV = mRootView.findViewById(R.id.uv_value);
-            todayUV.setText(today.getmUV().getmUV());
+                // Set UV
+                TextView todayUV = mRootView.findViewById(R.id.uv_value);
+                todayUV.setText(today.getmUV().getmUV());
 
-            // Set description
-            TextView todayDescription = mRootView.findViewById(R.id.today_description);
-            todayDescription.setText(today.getmSkyState().getmDescription());
+                // Set description
+                TextView todayDescription = mRootView.findViewById(R.id.today_description);
+                todayDescription.setText(today.getmSkyState().getmDescription());
+            }
+
+            // Set news in view
+            ViewPager viewPager =  getActivity().findViewById(R.id.news_viewpager);
+            viewPager.setAdapter(new NewsViewPagerAdapter(getActivity(), mNewsList));
         }
-
-        // Set news in view
-        ViewPager viewPager =  getActivity().findViewById(R.id.news_viewpager);
-        viewPager.setAdapter(new NewsViewPagerAdapter(getActivity(), mNewsList));
     }
 
     private void checkNetworkStatus(View view){

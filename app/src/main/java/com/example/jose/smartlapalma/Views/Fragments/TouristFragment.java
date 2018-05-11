@@ -55,7 +55,7 @@ public class TouristFragment extends Fragment {
         setClickListenersToButtons(rootView);
 
         // Set error if network is noot available
-        checkNetworkStatus();
+        checkNetworkStatus(rootView);
 
         return rootView;
     }
@@ -125,7 +125,7 @@ public class TouristFragment extends Fragment {
         }
     }
 
-    private void checkNetworkStatus(){
+    private void checkNetworkStatus(View view){
 
         if(!CustomUtils.isNetworkAvailable(getActivity())){
 
@@ -134,10 +134,10 @@ public class TouristFragment extends Fragment {
             linearLayout.setVisibility(View.GONE);
 
             // Show error message of possible network error
-            TextView error = getActivity().findViewById(R.id.error_request);
+            TextView error = view.findViewById(R.id.error_request);
             error.setVisibility(View.VISIBLE);
 
-            ImageView errorImage = getActivity().findViewById(R.id.error_imageview);
+            ImageView errorImage = view.findViewById(R.id.error_imageview);
             errorImage.setVisibility(View.VISIBLE);
         }
     }

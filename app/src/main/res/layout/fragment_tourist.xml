@@ -3,11 +3,175 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_screen"
+    android:orientation="vertical"
     tools:context=".Views.Fragments.TouristFragment">
 
+    <!--Error message-->
     <TextView
+        android:id="@+id/error_request"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/internet_error"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="50dp"
+        android:visibility="gone"
+        android:textSize="28dp"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:id="@+id/error_imageview"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:src="@drawable/sadface"/>
+
+    <LinearLayout
+        android:id="@+id/linearlayout_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="tourist!!" />
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/meteo_scroll_view_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textSize="35dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:text="@string/weather_today"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
+                android:textSize="15dp"
+                android:gravity="center"
+                android:text="@string/resident_fragment_weather_subtitle"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/weather_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginRight="10dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/today_max_degrees"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:textSize="25dp" />
+
+                    <TextView
+                        android:id="@+id/today_min_degrees"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="25dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/uv_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="13dp" />
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/uv" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/today_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
+                android:gravity="center"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="25dp"
+            android:gravity="center|bottom"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/interest_places_button"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:backgroundTint="@color/buttonColor"
+                android:textColor="@color/md_white_1000"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:text="@string/interest_places"/>
+
+            <Button
+                android:id="@+id/transports_button"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:layout_marginBottom="25dp"
+                android:backgroundTint="@color/buttonColor"
+                android:textColor="@color/md_white_1000"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:text="@string/transport"/>
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

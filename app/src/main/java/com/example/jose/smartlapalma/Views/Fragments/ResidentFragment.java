@@ -34,6 +34,8 @@ import java.util.ArrayList;
 
 public class ResidentFragment extends Fragment {
 
+    private static final String TAG = "ResidentFragment";
+
     private final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     private SharedPreferences mPrefs;

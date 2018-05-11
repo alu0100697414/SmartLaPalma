@@ -97,7 +97,8 @@ public class Request {
                                 String latitude = currentObject.getJSONObject(BusStop.mAttributesKey).getString(BusStop.mLatKey);
                                 String longitude = currentObject.getJSONObject(BusStop.mAttributesKey).getString(BusStop.mLngKey);
 
-                                if(!latitude.isEmpty() && !longitude.isEmpty()){
+                                if(!latitude.isEmpty() && !longitude.isEmpty() &&
+                                        !latitude.equals("null") && !longitude.equals("null")){
 
                                     // Get latitude and longitude in double
                                     double customLat = CustomUtils.getLat(latitude);
@@ -116,7 +117,7 @@ public class Request {
 
                             BusActivity.loadData();
                         } catch (Throwable t) {
-                            Log.e(TAG, "Error while parsing the json.");
+                            Log.e(TAG, "Error while parsing the json bus.", t);
                         }
 
                         GetApplicationDataTask.setBusStopCallState(true);
@@ -169,7 +170,7 @@ public class Request {
 
                             TaxiActivity.loadData();
                         } catch (Throwable t) {
-                            Log.e(TAG, "Error while parsing the json.");
+                            Log.e(TAG, "Error while parsing the json taxi.");
                         }
 
                         GetApplicationDataTask.setTaxiStopCallState(true);
@@ -229,7 +230,7 @@ public class Request {
                             }
 
                         } catch (Throwable t) {
-                            Log.e(TAG, "Error while parsing the json.");
+                            Log.e(TAG, "Error while parsing the json tourist acommodation.");
                         }
 
                         GetApplicationDataTask.setTouristAccommodationCallState(true);
@@ -287,7 +288,7 @@ public class Request {
                             }
 
                         } catch (Throwable t) {
-                            Log.e(TAG, "Error while parsing the json.");
+                            Log.e(TAG, "Error while parsing the json church.");
                         }
 
                         GetApplicationDataTask.setChurchCallState(true);
@@ -345,7 +346,7 @@ public class Request {
                             }
 
                         } catch (Throwable t) {
-                            Log.e(TAG, "Error while parsing the json.");
+                            Log.e(TAG, "Error while parsing the json archeological.");
                         }
 
                         GetApplicationDataTask.setArcheologicalSiteCallState(true);
@@ -403,7 +404,7 @@ public class Request {
                             }
 
                         } catch (Throwable t) {
-                            Log.e(TAG, "Error while parsing the json.");
+                            Log.e(TAG, "Error while parsing the json library.");
                         }
 
                         GetApplicationDataTask.setLibraryCallState(true);
@@ -461,7 +462,7 @@ public class Request {
                             }
 
                         } catch (Throwable t) {
-                            Log.e(TAG, "Error while parsing the json.");
+                            Log.e(TAG, "Error while parsing the json monumental.");
                         }
 
                         GetApplicationDataTask.setMonumentCallState(true);
@@ -626,7 +627,10 @@ public class Request {
                                                 // Save weather information
                                                 openDataLaPalma.setmWeather(weather);
 
+                                                GetApplicationDataTask.setWeatherCallState(true);
+
                                             } catch (JSONException e) {
+                                                GetApplicationDataTask.setWeatherCallState(true);
                                                 e.printStackTrace();
                                             }
                                         }
@@ -634,11 +638,13 @@ public class Request {
                                     new Response.ErrorListener() {
                                         @Override
                                         public void onErrorResponse(VolleyError error) {
+                                            GetApplicationDataTask.setWeatherCallState(true);
                                         }
                                     });
 
                             requestQueue.add(stringRequest);
                         } catch (JSONException e) {
+                            GetApplicationDataTask.setWeatherCallState(true);
                             e.printStackTrace();
                         }
                     }
@@ -646,6 +652,7 @@ public class Request {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        GetApplicationDataTask.setWeatherCallState(true);
                     }
                 });
 

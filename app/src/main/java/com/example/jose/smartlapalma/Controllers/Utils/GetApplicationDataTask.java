@@ -37,14 +37,14 @@ public class GetApplicationDataTask extends AsyncTask<Void, Integer, Boolean> {
         mContext = context;
         mOpenDataLaPalma = openDataLaPalma;
 
-        busStopCallState = true;
+        busStopCallState = false;
         taxiStopCallState = false;
-        touristAccommodationCallState = true;
-        churchCallState = true;
-        archeologicalSiteCallState = true;
-        libraryCallState = true;
-        monumentCallState = true;
-        weatherCallState = true;
+        touristAccommodationCallState = false;
+        churchCallState = false;
+        archeologicalSiteCallState = false;
+        libraryCallState = false;
+        monumentCallState = false;
+        weatherCallState = false;
     }
 
     @Override
@@ -62,9 +62,9 @@ public class GetApplicationDataTask extends AsyncTask<Void, Integer, Boolean> {
         Request.getWeatherInfo();
 
         // Wait for resuts of calls
-        while(!busStopCallState && !taxiStopCallState && !touristAccommodationCallState
-                && !churchCallState && !archeologicalSiteCallState && !libraryCallState
-                && !monumentCallState && !weatherCallState){
+        while(!busStopCallState || !taxiStopCallState || !touristAccommodationCallState
+                || !churchCallState || !archeologicalSiteCallState || !libraryCallState
+                || !monumentCallState || !weatherCallState){
             try {  Thread.sleep(250); }
             catch (InterruptedException e) { e.printStackTrace(); }
         }

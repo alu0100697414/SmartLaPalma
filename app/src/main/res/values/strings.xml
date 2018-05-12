@@ -26,7 +26,7 @@
     <string name="exit">SALIR</string>
 
     <!--Splash Activity-->
-    <string name="splash_network_error_face">Ups... :(</string>
+    <string name="splash_network_error_face" translatable="false">Ups... :(</string>
     <string name="splash_network_error">Sin Internet no puede funcionar esta aplicación... Consigue acceso y luego pulsa en recargar:</string>
 
     <!--Contact Activity-->
@@ -35,7 +35,7 @@
     <!--Detail New Activity-->
     <string name="share_option">Seleccione una aplicación</string>
     <string name="for_more_info">Puedes encontrar toda la noticia en la app Smart LaPalma</string>
-    <string name="app_url">app URL</string>
+    <string name="app_url" translatable="false">app URL</string>
 
     <!--Transport Activity-->
     <string name="taxi_button">Taxi</string>
@@ -65,9 +65,9 @@
     <string name="thermal_sensation">S. Térmica</string>
     <string name="humidity">Humedad</string>
     <string name="next_days">PRÓXIMOS DÍAS</string>
-    <string name="degree">º</string>
-    <string name="percentage">%</string>
-    <string name="velocity">km/h</string>
+    <string name="degree" translatable="false">º</string>
+    <string name="percentage" translatable="false">%</string>
+    <string name="velocity" translatable="false">km/h</string>
 
     <!--Months-->
     <string name="january">Enero</string>

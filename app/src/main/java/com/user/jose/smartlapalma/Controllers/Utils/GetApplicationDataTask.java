@@ -59,7 +59,7 @@ public class GetApplicationDataTask extends AsyncTask<Void, Integer, Boolean> {
         Request.getArcheologicalSites();
         Request.getLibraries();
         Request.getMonuments();
-        Request.getWeatherInfo();
+        Request.getWeatherInfo(mContext);
 
         // Wait for resuts of calls
         while(!busStopCallState || !taxiStopCallState || !touristAccommodationCallState

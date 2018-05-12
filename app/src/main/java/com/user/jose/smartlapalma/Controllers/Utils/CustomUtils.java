@@ -117,4 +117,65 @@ public class CustomUtils {
                 return "";
         }
     }
+
+    /****
+     * This function return the formmatted sky state description from a number
+     * @param context Application context
+     * @param number Number of sky state
+     * @return
+     */
+    public static String getSkyStateDescriptionFromInteger(Context context, String number){
+        switch (number){
+            case "12":
+                return context.getString(R.string.weather_description_12);
+            case "43":
+                return context.getString(R.string.weather_description_43);
+            case "14":
+                return context.getString(R.string.weather_description_14);
+            case "13":
+                return context.getString(R.string.weather_description_13);
+            case "44":
+                return context.getString(R.string.weather_description_44);
+            case "45":
+                return context.getString(R.string.weather_description_45);
+            case "15":
+                return context.getString(R.string.weather_description_15);
+            case "24":
+                return context.getString(R.string.weather_description_24);
+            case "23":
+                return context.getString(R.string.weather_description_23);
+            case "26":
+                return context.getString(R.string.weather_description_26);
+            case "25":
+                return context.getString(R.string.weather_description_25);
+            case "11":
+                return context.getString(R.string.weather_description_11);
+            case "16":
+                return context.getString(R.string.weather_description_16);
+            case "17":
+                return context.getString(R.string.weather_description_17);
+            case "33":
+                return context.getString(R.string.weather_description_33);
+            case "34":
+                return context.getString(R.string.weather_description_34);
+            case "35":
+                return context.getString(R.string.weather_description_35);
+            case "36":
+                return context.getString(R.string.weather_description_36);
+            case "27":
+                return context.getString(R.string.weather_description_27);
+            case "53":
+                return context.getString(R.string.weather_description_53);
+            case "granizo":
+                return context.getString(R.string.weather_description_granizo);
+            case "bruma":
+                return context.getString(R.string.weather_description_bruma);
+            case "niebla":
+                return context.getString(R.string.weather_description_niebla);
+            case "calima":
+                return context.getString(R.string.weather_description_calima);
+            default:
+                return "";
+        }
+    }
 }

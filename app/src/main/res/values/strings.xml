@@ -99,4 +99,30 @@
     <string name="resident_fragment_weather_subtitle">Para más información diríjase a la sección de meteorología</string>
     <string name="weather_today">Hoy en La Palma</string>
 
+    <!--Weather description states-->
+    <string name="weather_description_12">Poco nuboso</string>
+    <string name="weather_description_43">Intervalos nubosos con lluvia escasa</string>
+    <string name="weather_description_14">Nuboso</string>
+    <string name="weather_description_13">Intervalos nubosos</string>
+    <string name="weather_description_44">Nuboso con lluvia escasa</string>
+    <string name="weather_description_45">Muy nuboso con lluvia escasa</string>
+    <string name="weather_description_15">Muy nuboso</string>
+    <string name="weather_description_24">Nuboso con lluvia</string>
+    <string name="weather_description_23">Intervalos nubosos con lluvia</string>
+    <string name="weather_description_26">Cubierto con lluvia</string>
+    <string name="weather_description_25">Muy nuboso con lluvia</string>
+    <string name="weather_description_11">Despejado</string>
+    <string name="weather_description_16">Cubierto</string>
+    <string name="weather_description_17">Nubes altas</string>
+    <string name="weather_description_33">Intervalos nubosos con nieve</string>
+    <string name="weather_description_34">Nuboso con nieve</string>
+    <string name="weather_description_35">Muy nuboso con nieve</string>
+    <string name="weather_description_36">Cubierto con nieve</string>
+    <string name="weather_description_27">Chubascos</string>
+    <string name="weather_description_53">Tormenta</string>
+    <string name="weather_description_granizo">Granizo</string>
+    <string name="weather_description_bruma">Bruma</string>
+    <string name="weather_description_niebla">Niebla</string>
+    <string name="weather_description_calima">Calima</string>
+
 </resources>

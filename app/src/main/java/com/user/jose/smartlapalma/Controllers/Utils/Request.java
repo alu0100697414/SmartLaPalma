@@ -1,5 +1,6 @@
 package com.user.jose.smartlapalma.Controllers.Utils;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.android.volley.RequestQueue;
@@ -479,7 +480,7 @@ public class Request {
     }
 
     // Get JSON with the weather information
-    public static void getWeatherInfo(){
+    public static void getWeatherInfo(final Context context){
 
         StringRequest stringRequest = new StringRequest(com.android.volley.Request.Method.GET, WEATHER_API,
                 new Response.Listener<String>() {
@@ -547,8 +548,11 @@ public class Request {
                                                     // Save sky state values
                                                     skyState.setmValue(skyStateArray.getJSONObject(j).get(
                                                             SkyState.valueKey).toString());
-                                                    skyState.setmDescription(skyStateArray.getJSONObject(j).get(
-                                                            SkyState.descriptionKey).toString());
+                                                    skyState.setmDescription(CustomUtils.getSkyStateDescriptionFromInteger(
+                                                            context,
+                                                            skyStateArray.getJSONObject(j).get(
+                                                                    SkyState.valueKey).toString()
+                                                    ));
 
                                                     // Get wind
                                                     Wind wind = new Wind();

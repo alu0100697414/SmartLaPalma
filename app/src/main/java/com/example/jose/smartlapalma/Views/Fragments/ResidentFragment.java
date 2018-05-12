@@ -122,7 +122,7 @@ public class ResidentFragment extends Fragment {
     private void setDataInView(){
 
         if(getActivity() != null){
-            
+
             // Hide spinner when data is loaded
             mProgressBar.setVisibility(View.GONE);
 

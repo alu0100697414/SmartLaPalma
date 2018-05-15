@@ -136,6 +136,10 @@ public class CustomMaterialDrawer {
                         // Menu actions
                         switch ((int) drawerItem.getIdentifier()){
 
+                            case 1: // Open main activity
+                                openMainActivity();
+                                break;
+
                             case 2: // Open news activity
                                 openNewsActivity();
                                 break;
@@ -255,6 +259,10 @@ public class CustomMaterialDrawer {
                         // Menu actions
                         switch ((int) drawerItem.getIdentifier()){
 
+                            case 1: // Open main activity
+                                openMainActivity();
+                                break;
+
                             case 2: // Open news activity
                                 openNewsActivity();
                                 break;
@@ -298,6 +306,14 @@ public class CustomMaterialDrawer {
             mActivity.finish();
         }
 
+        mActivity.startActivity(intent);
+    }
+
+    // This function open the main screen
+    private void openMainActivity(){
+
+        Intent intent = new Intent(mActivity, MainActivity.class);
+        mActivity.finish();
         mActivity.startActivity(intent);
     }
 

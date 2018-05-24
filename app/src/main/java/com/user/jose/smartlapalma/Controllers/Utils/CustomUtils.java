@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.DisplayMetrics;
 
+import com.user.jose.smartlapalma.Models.ApplicationLanguage;
 import com.user.jose.smartlapalma.Models.Months;
 import com.user.jose.smartlapalma.R;
 
@@ -25,6 +26,22 @@ public class CustomUtils {
                 = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    /***
+     * Check device languague and return application languague
+     * @param language
+     * @return Application language
+     */
+    public static String getApplicationLanguage(String language) {
+        switch (language){
+            case ApplicationLanguage.ENGLISH:
+                return language;
+            case ApplicationLanguage.SPANISH:
+                return language;
+            default:
+                return ApplicationLanguage.SPANISH;
+        }
     }
 
     /***

@@ -43,7 +43,8 @@ public class SplashActivity extends AppCompatActivity {
         // Current device language is updated
         mEditor = mPrefs.edit();
         mEditor.putString(SharedPreferencesKeys.CURRENT_LANGUAGE,
-                Locale.getDefault().getDisplayLanguage().toString());
+                CustomUtils.getApplicationLanguage(
+                        Locale.getDefault().getDisplayLanguage().toString()));
         mEditor.commit();
 
         // Set restart button listener

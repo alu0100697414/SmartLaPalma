@@ -35,7 +35,7 @@
     <!--Detail New Activity-->
     <string name="share_option">Seleccione una aplicación</string>
     <string name="for_more_info">Puedes encontrar toda la noticia en la app Smart LaPalma</string>
-    <string name="app_url" translatable="false">app URL</string>
+    <string name="app_url" translatable="false">https://play.google.com/apps/testing/com.user.jose.smartlapalma</string>
 
     <!--Transport Activity-->
     <string name="taxi_button">Taxi</string>

@@ -35,7 +35,7 @@
         <activity
             android:name=".Views.Activities.MainActivity"
             android:configChanges="orientation"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTask"
             android:label="@string/main_activity_name"
             android:screenOrientation="portrait" />
         <activity
